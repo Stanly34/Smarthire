@@ -1,0 +1,396 @@
+SmartHire – AI Based College Placement & Skill Development Platform
+
+Project Specification Document
+
+1. Project Title
+
+SmartHire: Intelligent College Placement and Skill Enhancement Platform
+
+2. Project Overview
+
+SmartHire is a full-stack web application designed to automate and modernize the college placement process.
+
+The platform connects students and companies through an intelligent system that evaluates:
+
+Technical skills
+
+Coding performance
+
+Job requirements
+
+The system is controlled by the college administration to ensure transparency, fairness, and data security.
+
+The platform also includes a coding practice system, smart job matching, real-time communication, and placement management tools.
+
+3. System Architecture
+
+The application follows a three-tier architecture.
+
+Frontend
+
+React
+
+Vite
+
+TailwindCSS
+
+Axios
+
+React Router
+
+Socket.io client
+
+Responsible for:
+
+User interface
+
+Dashboards
+
+Coding practice UI
+
+Job listings
+
+Chat system
+
+Backend
+
+Node.js
+
+Express.js
+
+JWT authentication
+
+bcrypt password hashing
+
+Socket.io
+
+Responsible for:
+
+API endpoints
+
+Authentication
+
+Business logic
+
+Smart matching system
+
+Coding score management
+
+Chat messaging
+
+Database
+
+PostgreSQL
+
+Responsible for:
+
+storing user data
+
+storing coding results
+
+storing job applications
+
+storing chat messages
+
+4. System Users
+
+The system has three types of users.
+
+4.1 Admin (College Authority)
+
+The college administration manages the entire system.
+
+Responsibilities:
+
+Approve student registrations
+
+Approve company registrations
+
+Manage job postings
+
+Monitor coding scores
+
+Schedule interviews
+
+View analytics and reports
+
+4.2 Student
+
+Students use the platform to develop skills and apply for jobs.
+
+Students can:
+
+Register and login
+
+Create and update profile
+
+Add technical skills
+
+Upload resume
+
+Practice coding
+
+Take scored coding tests
+
+View coding scores
+
+Apply for jobs
+
+View interview schedule
+
+Chat with companies
+
+Student Profile Includes
+
+Personal details
+
+Technical skills
+
+Resume
+
+Coding test scores
+
+Applied jobs
+
+Interview status
+
+4.3 Company
+
+Companies use the platform to recruit students.
+
+Companies can:
+
+Register and login
+
+Create company profile
+
+Post job openings
+
+Define job requirements
+
+View applicants
+
+View eligible students
+
+Select candidates
+
+Chat with students
+
+5. Coding Practice System
+
+SmartHire includes an integrated coding platform for skill evaluation.
+
+Two modes are available.
+
+Practice Mode
+
+Purpose: learning.
+
+Features:
+
+Students solve coding problems
+
+Results are not recorded
+
+Used for skill improvement
+
+Score Mode
+
+Purpose: evaluation.
+
+Features:
+
+Students solve coding problems
+
+Scores are recorded
+
+Scores are stored in student profile
+
+Companies can view coding scores
+
+Supported Languages
+
+C
+
+Python
+
+Java
+
+C++
+
+JavaScript
+
+Difficulty Levels
+
+Beginner
+
+Intermediate
+
+Advanced
+
+6. Smart Job Matching System
+
+SmartHire automatically identifies eligible candidates.
+
+When a company posts a job, it specifies:
+
+required skills
+
+minimum coding score
+
+interview date
+
+The system checks student profiles.
+
+Eligibility condition:
+
+Student has required skills
+AND
+Student coding score >= minimum score
+
+If conditions are satisfied:
+
+student is marked eligible
+
+interview date is assigned
+
+notification is sent
+
+7. Job Application System
+
+Students can apply to job postings.
+
+Application data includes:
+
+student id
+
+job id
+
+application status
+
+application date
+
+Application status:
+
+applied
+
+shortlisted
+
+rejected
+
+selected
+
+8. Real-Time Chat System
+
+The system includes real-time communication between students and companies.
+
+Technology used:
+
+Socket.io
+
+Features:
+
+instant messaging
+
+interview discussion
+
+job clarification
+
+9. Database Design
+
+Main tables:
+
+Users
+Students
+Companies
+Jobs
+Skills
+Student Skills
+Applications
+Coding Problems
+Coding Results
+Messages
+
+10. API Structure
+
+Authentication APIs
+
+POST /api/auth/register-student
+POST /api/auth/register-company
+POST /api/auth/login
+
+Student APIs
+
+GET /api/students/me
+PUT /api/students/me
+
+Job APIs
+
+GET /api/jobs
+GET /api/jobs/:id
+POST /api/jobs
+PUT /api/jobs/:id
+DELETE /api/jobs/:id
+
+Application APIs
+
+POST /api/applications
+GET /api/applications/my
+GET /api/jobs/:id/applicants
+
+Coding APIs
+
+GET /api/coding/problems
+GET /api/coding/problems/:id
+POST /api/coding/submit
+GET /api/coding/results/me
+
+Chat APIs
+
+POST /api/chat/send
+GET /api/chat/messages/:userId
+11. Objectives
+
+The main objectives of SmartHire are:
+
+Automate the campus placement process
+
+Reduce manual administrative work
+
+Improve student coding skills
+
+Provide transparent recruitment
+
+Implement intelligent job matching
+
+Modernize college placement systems
+
+12. Future Enhancements
+
+Potential future improvements:
+
+AI resume analyzer
+
+AI job recommendation system
+
+video interview integration
+
+internship management system
+
+advanced analytics dashboard
+
+13. Conclusion
+
+SmartHire is a complete ecosystem for campus placement and skill development.
+
+It combines:
+
+coding skill evaluation
+
+automated recruitment
+
+intelligent candidate matching
+
+real-time communication
+
+The platform improves placement efficiency while helping students become industry ready.
