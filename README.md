@@ -98,7 +98,7 @@ npm run dev:web
 
 | Role | Email | Password |
 |------|-------|----------|
-| Admin | admin@smarthire.com | password |
+| Admin | admin@smarthire.com | admin123 |
 
 Students and companies must register and get approved by the admin.
 

@@ -133,7 +133,7 @@ export default function Landing() {
         <div className="text-xs mt-2 space-x-4">
           <span>Admin Login: admin@smarthire.com</span>
           <span>|</span>
-          <span>Password: password</span>
+          <span>Password: admin123</span>
         </div>
       </footer>
     </div>

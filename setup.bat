@@ -27,5 +27,5 @@ echo    npm run dev
 echo.
 echo 5. Open http://localhost:5173
 echo.
-echo Admin Login: admin@smarthire.com / password
+echo Admin Login: admin@smarthire.com / admin123
 echo ============================================

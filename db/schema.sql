@@ -138,7 +138,7 @@ ALTER TABLE applications ADD COLUMN IF NOT EXISTS updated_at TIMESTAMP DEFAULT N
 
 -- Seed default admin
 INSERT INTO users (email, password, role, is_approved)
-VALUES ('admin@smarthire.com', '$2b$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin', TRUE)
+VALUES ('admin@smarthire.com', '$2b$10$zQGC.v.jgmk79SjSFp00teQG5JK.DJZ4fQkiCFcCFwEcKu.Sybho2', 'admin', TRUE)
 ON CONFLICT (email) DO NOTHING;
 
 -- Seed common skills

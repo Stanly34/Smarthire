@@ -45,7 +45,7 @@ export default function Login() {
               <input
                 type="email"
                 className="input"
-                placeholder="you@example.com"
+                placeholder="admin@smarthire.com"
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                 required
@@ -56,7 +56,7 @@ export default function Login() {
               <input
                 type="password"
                 className="input"
-                placeholder="••••••••"
+                placeholder="admin123"
                 value={form.password}
                 onChange={(e) => setForm({ ...form, password: e.target.value })}
                 required
@@ -70,7 +70,7 @@ export default function Login() {
             <p>Don't have an account?</p>
             <div className="flex gap-4 justify-center">
               <Link to="/register/student" className="text-blue-600 hover:underline font-medium">Register as Student</Link>
-              <span>·</span>
+              <span>.</span>
               <Link to="/register/company" className="text-blue-600 hover:underline font-medium">Register as Company</Link>
             </div>
           </div>
