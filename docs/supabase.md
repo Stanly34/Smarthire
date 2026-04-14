@@ -20,7 +20,7 @@ If your database password contains special characters such as `@`, URL-encode th
 Open **SQL Editor** in Supabase and run the full contents of:
 
 ```text
-backend/db/schema.sql
+db/schema.sql
 ```
 
 This creates the SmartHire tables and seeds the default admin, skills, and sample coding problems.
@@ -42,11 +42,11 @@ After the first successful deployment, optionally set:
 FRONTEND_URL=https://your-vercel-domain.vercel.app
 ```
 
-Do not set `VITE_API_URL` on Vercel. The frontend should call the backend through same-domain `/api`.
+Do not set `VITE_API_URL` on Vercel. The web app should call the API through same-domain `/api`.
 
 ## 4. Validate Locally
 
-If you want to test from this machine, place the Supabase values in `backend/.env`, then run:
+If you want to test from this machine, place the Supabase values in root `.env`, then run:
 
 ```bash
 npm run db:check
@@ -56,7 +56,7 @@ Expected result:
 
 ```text
 SmartHire database check
-Connected using SSL: yes
+Connected using SSL: no
 Tables found: 11/11
 PASS default admin: 1 row(s)
 PASS skills: 34 row(s)
@@ -65,4 +65,4 @@ PASS coding problems: 5 row(s)
 
 For the currently validated Supabase pooler, the expected SSL line is `Connected using SSL: no` because `DATABASE_SSL=false` is required for this pooler endpoint.
 
-Never commit `backend/.env`, Supabase credentials, Vercel tokens, or `.vercel/`.
+Never commit `.env`, Supabase credentials, Vercel tokens, or `.vercel/`.

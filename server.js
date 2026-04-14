@@ -30,7 +30,7 @@ app.use('/api/skills', require('./routes/skills'));
 if (require.main === module) {
   const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => {
-    console.log(`SmartHire backend running on http://localhost:${PORT}`);
+    console.log(`SmartHire API running on http://localhost:${PORT}`);
   });
 }
 

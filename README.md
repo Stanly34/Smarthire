@@ -1,14 +1,14 @@
-# SmartHire – AI Based College Placement Platform
+# SmartHire - AI Based College Placement Platform
 
 A full-stack web application connecting students and companies through intelligent skill matching, coding assessments, and streamlined campus recruitment.
 
 ## Tech Stack
 
 | Layer | Technology |
-|-------|-----------|
-| Frontend | React 18 + Vite + TailwindCSS |
-| Backend | Node.js + Express.js |
-| Database | PostgreSQL |
+|-------|------------|
+| Web UI | React 18 + Vite + TailwindCSS |
+| API | Node.js + Express.js |
+| Database | PostgreSQL / Supabase |
 | Auth | JWT + bcrypt |
 | Chat | REST API polling |
 | Charts | Recharts |
@@ -17,77 +17,22 @@ A full-stack web application connecting students and companies through intellige
 
 ## Project Structure
 
-```
+```text
 New/
-├── backend/
-│   ├── server.js              # Express API server
-│   ├── .env                   # Environment variables
-│   ├── package.json
-│   ├── db/
-│   │   ├── index.js           # PostgreSQL pool
-│   │   └── schema.sql         # Database schema + seed data
-│   ├── middleware/
-│   │   └── auth.js            # JWT middleware
-│   ├── controllers/
-│   │   ├── authController.js
-│   │   ├── studentController.js
-│   │   ├── companyController.js
-│   │   ├── jobController.js
-│   │   ├── applicationController.js
-│   │   ├── adminController.js
-│   │   ├── codingController.js
-│   │   └── chatController.js
-│   └── routes/
-│       ├── auth.js
-│       ├── students.js
-│       ├── companies.js
-│       ├── jobs.js
-│       ├── applications.js
-│       ├── admin.js
-│       ├── coding.js
-│       ├── chat.js
-│       └── skills.js
-│
-└── frontend/
-    ├── index.html
-    ├── vite.config.js
-    ├── tailwind.config.js
-    └── src/
-        ├── main.jsx
-        ├── App.jsx
-        ├── index.css
-        ├── context/
-        │   └── AuthContext.jsx
-        ├── services/
-        │   ├── api.js
-        ├── components/
-        │   ├── Layout.jsx
-        │   ├── Sidebar.jsx
-        │   ├── SkillTag.jsx
-        │   └── StatusBadge.jsx
-        └── pages/
-            ├── Landing.jsx
-            ├── Login.jsx
-            ├── RegisterStudent.jsx
-            ├── RegisterCompany.jsx
-            ├── Chat.jsx
-            ├── student/
-            │   ├── StudentDashboard.jsx
-            │   ├── StudentProfile.jsx
-            │   ├── JobList.jsx
-            │   ├── MyApplications.jsx
-            │   └── CodingPractice.jsx
-            ├── company/
-            │   ├── CompanyDashboard.jsx
-            │   ├── CompanyProfile.jsx
-            │   ├── PostJob.jsx
-            │   ├── ViewApplicants.jsx
-            │   └── EligibleStudents.jsx
-            └── admin/
-                ├── AdminDashboard.jsx
-                ├── ManageStudents.jsx
-                ├── ManageCompanies.jsx
-                └── ManageJobs.jsx
+├── api/[...path].js          # Vercel API entrypoint
+├── server.js                 # Express API server
+├── package.json              # Single root package
+├── index.html                # Vite HTML entry
+├── vite.config.mjs
+├── tailwind.config.cjs
+├── postcss.config.cjs
+├── src/                      # React app
+├── controllers/              # API controllers
+├── routes/                   # API routes
+├── middleware/               # JWT middleware
+├── db/                       # PostgreSQL pool + schema
+├── scripts/                  # DB checks and demo seeding
+└── docs/
 ```
 
 ---
@@ -95,25 +40,21 @@ New/
 ## Setup Instructions
 
 ### Prerequisites
+
 - Node.js v18+
-- PostgreSQL 14+
+- PostgreSQL 14+ or Supabase PostgreSQL
 - npm
 
-### Step 1: Setup PostgreSQL Database
+### Step 1: Install Dependencies
 
-```sql
--- Open psql or pgAdmin and run:
-CREATE DATABASE smarthire;
-```
-
-Then apply the schema:
 ```bash
-psql -U postgres -d smarthire -f backend/db/schema.sql
+npm install
 ```
 
 ### Step 2: Configure Environment
 
-Edit `backend/.env`:
+Create `.env` in the project root:
+
 ```env
 PORT=5000
 DATABASE_URL=postgresql://postgres:YOUR_PASSWORD@localhost:5432/smarthire
@@ -122,33 +63,34 @@ NODE_ENV=development
 FRONTEND_URL=http://localhost:5173
 ```
 
-### Step 3: Install Dependencies
+For Supabase, use the pooler value documented in `docs/supabase.md`.
+
+### Step 3: Setup Database
+
+For local PostgreSQL:
 
 ```bash
-# Backend
-cd backend
-npm install
-
-# Frontend
-cd ../frontend
-npm install
+psql -U postgres -c "CREATE DATABASE smarthire;"
+psql -U postgres -d smarthire -f db/schema.sql
 ```
 
-### Step 4: Start the Application
+For Supabase, run the contents of `db/schema.sql` in the Supabase SQL Editor.
 
-**Terminal 1 – Backend:**
+### Step 4: Start The App
+
 ```bash
-cd backend
 npm run dev
 ```
-Backend runs at: http://localhost:5000
 
-**Terminal 2 – Frontend:**
+API runs at `http://localhost:5000`.
+Vite runs at `http://localhost:5173`.
+
+You can also run each side separately:
+
 ```bash
-cd frontend
-npm run dev
+npm run dev:api
+npm run dev:web
 ```
-Frontend runs at: http://localhost:5173
 
 ---
 
@@ -158,38 +100,41 @@ Frontend runs at: http://localhost:5173
 |------|-------|----------|
 | Admin | admin@smarthire.com | password |
 
-> Students and companies must register and get approved by the admin.
+Students and companies must register and get approved by the admin.
 
 ---
 
 ## Features
 
 ### Admin Panel
+
 - View real-time stats: students, companies, jobs, applications, placements
 - Approve/reject student and company registrations
 - Analytics charts: top skills, departments, jobs per company
 - View all jobs and applications
 
 ### Student Features
+
 - Profile with skills, CGPA, resume, bio
-- AI-powered job matching with % score
+- AI-powered job matching with percentage score
 - Browse and apply for jobs
 - Track application status
-- Coding practice (practice & scored modes)
-- Real-time chat with companies
+- Coding practice in practice and scored modes
+- Chat with companies through REST polling
 
 ### Company Features
+
 - Company profile management
 - Post jobs with required skills, min CGPA, min coding score
-- View all applicants with status management
+- View applicants with status management
 - AI-filtered eligible students list
-- Real-time chat with students
+- Chat with students through REST polling
 
 ### AI Skill Matching
-The algorithm computes:
-```
-matchPercent = (matched skills / required skills) × 100
-eligible = matchPercent ≥ 50 AND cgpa ≥ minCGPA AND codingScore ≥ minScore
+
+```text
+matchPercent = (matched skills / required skills) x 100
+eligible = matchPercent >= 50 AND cgpa >= minCGPA AND codingScore >= minScore
 ```
 
 ---
@@ -200,9 +145,9 @@ eligible = matchPercent ≥ 50 AND cgpa ≥ minCGPA AND codingScore ≥ minScore
 |--------|----------|-------------|
 | POST | /api/auth/register-student | Student registration |
 | POST | /api/auth/register-company | Company registration |
-| POST | /api/auth/login | Login (all roles) |
+| POST | /api/auth/login | Login |
 | GET | /api/students/me | Get student profile |
-| PUT | /api/students/me | Update profile + skills |
+| PUT | /api/students/me | Update profile and skills |
 | GET | /api/students/matched-jobs | AI matched jobs |
 | GET | /api/companies/me | Company profile |
 | GET | /api/jobs | Browse open jobs |
@@ -221,25 +166,26 @@ eligible = matchPercent ≥ 50 AND cgpa ≥ minCGPA AND codingScore ≥ minScore
 
 ---
 
-## Database Schema
+## Useful Commands
 
-**Tables:** users, students, companies, jobs, skills, student_skills, job_skills, applications, coding_problems, coding_results, messages
-
----
-
-## Windows Quick Start
-
-Run `setup.bat` for automated dependency installation.
+```bash
+npm run dev
+npm run build
+npm run preview
+npm run start
+npm run db:check
+npm run seed:demo
+```
 
 ---
 
 ## One-Project Vercel Deployment
 
-This repo is configured to deploy the frontend and backend as one Vercel project:
+This repo deploys as one Vercel project:
 
-- Vercel installs both workspaces with `npm ci --prefix frontend && npm ci --prefix backend`.
-- Vercel builds the frontend with `npm run build --prefix frontend`.
-- Static assets are served from `frontend/dist`.
+- Vercel installs with `npm ci`.
+- Vercel builds with `npm run build`.
+- Static assets are served from `dist`.
 - `/api/*` requests are handled by the Express app through `api/[...path].js`.
 - React routes are rewritten to `index.html` for SPA navigation.
 
@@ -258,7 +204,7 @@ Optional environment variables:
 FRONTEND_URL=https://your-vercel-domain.vercel.app
 ```
 
-Do not set `VITE_API_URL` for the Vercel deployment. The frontend uses relative `/api` requests so the frontend and backend stay on the same domain.
+Do not set `VITE_API_URL` for the Vercel deployment. The web app uses relative `/api` requests so UI and API stay on the same domain.
 
 Before validating login or dashboard data, run the schema against Supabase using the SQL Editor, then optionally verify from this machine:
 

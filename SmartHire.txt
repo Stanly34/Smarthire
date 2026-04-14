@@ -20,13 +20,13 @@ Job requirements
 
 The system is controlled by the college administration to ensure transparency, fairness, and data security.
 
-The platform also includes a coding practice system, smart job matching, real-time communication, and placement management tools.
+The platform also includes a coding practice system, smart job matching, REST-polled communication, and placement management tools.
 
 3. System Architecture
 
 The application follows a three-tier architecture.
 
-Frontend
+Web UI
 
 React
 
@@ -38,7 +38,6 @@ Axios
 
 React Router
 
-Socket.io client
 
 Responsible for:
 
@@ -52,7 +51,7 @@ Job listings
 
 Chat system
 
-Backend
+API
 
 Node.js
 
@@ -62,7 +61,7 @@ JWT authentication
 
 bcrypt password hashing
 
-Socket.io
+REST API polling
 
 Responsible for:
 
@@ -280,17 +279,17 @@ rejected
 
 selected
 
-8. Real-Time Chat System
+8. Chat System
 
-The system includes real-time communication between students and companies.
+The system includes communication between students and companies.
 
 Technology used:
 
-Socket.io
+REST API polling
 
 Features:
 
-instant messaging
+message sending and periodic refresh
 
 interview discussion
 
@@ -391,6 +390,6 @@ automated recruitment
 
 intelligent candidate matching
 
-real-time communication
+REST-polled communication
 
 The platform improves placement efficiency while helping students become industry ready.
