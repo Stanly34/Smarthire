@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import api from '../services/api';
-import { disconnectSocket } from '../services/socket';
 
 const AuthContext = createContext(null);
 
@@ -29,7 +28,6 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('smarthire_user');
     localStorage.removeItem('smarthire_token');
     delete api.defaults.headers.common['Authorization'];
-    disconnectSocket();
     setUser(null);
   };
 

@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Layout from '../components/Layout';
 import api from '../services/api';
-import { connectSocket, getSocket } from '../services/socket';
 import { useAuth } from '../context/AuthContext';
 
+const CONTACT_POLL_MS = 5000;
+const MESSAGE_POLL_MS = 3000;
+
 export default function Chat() {
-  const { user, getToken } = useAuth();
+  const { user } = useAuth();
   const [contacts, setContacts] = useState([]);
   const [activeContact, setActiveContact] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -13,34 +15,65 @@ export default function Chat() {
   const [sending, setSending] = useState(false);
   const messagesEndRef = useRef(null);
 
+  const loadContacts = async () => {
+    const res = await api.get('/chat/contacts');
+    setContacts(res.data);
+  };
+
+  const loadMessages = async (contact = activeContact) => {
+    if (!contact?.other_id) return;
+    const res = await api.get(`/chat/messages/${contact.other_id}`);
+    setMessages(res.data);
+  };
+
   useEffect(() => {
-    const token = getToken();
-    if (!token) return;
-    const socket = connectSocket(token);
+    if (!user?.id) return;
+    let isMounted = true;
 
-    socket.on('receive_message', (msg) => {
-      setMessages(prev => [...prev, msg]);
-      // Refresh contacts list so last_message updates
-      api.get('/chat/contacts').then(res => setContacts(res.data)).catch(() => {});
-    });
+    const refreshContacts = async () => {
+      try {
+        const res = await api.get('/chat/contacts');
+        if (isMounted) setContacts(res.data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
 
-    socket.on('message_sent', (msg) => {
-      setMessages(prev => [...prev, msg]);
-    });
-
-    socket.on('connect_error', (err) => {
-      console.error('Socket connection error:', err.message);
-    });
-
-    api.get('/chat/contacts').then(res => setContacts(res.data)).catch(console.error);
+    refreshContacts();
+    const intervalId = window.setInterval(refreshContacts, CONTACT_POLL_MS);
 
     return () => {
-      socket.off('receive_message');
-      socket.off('message_sent');
-      socket.off('connect_error');
+      isMounted = false;
+      window.clearInterval(intervalId);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.id]);
+
+  useEffect(() => {
+    if (!activeContact?.other_id) {
+      setMessages([]);
+      return;
+    }
+
+    let isMounted = true;
+    const contact = activeContact;
+
+    const refreshMessages = async () => {
+      try {
+        const res = await api.get(`/chat/messages/${contact.other_id}`);
+        if (isMounted) setMessages(res.data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    refreshMessages();
+    const intervalId = window.setInterval(refreshMessages, MESSAGE_POLL_MS);
+
+    return () => {
+      isMounted = false;
+      window.clearInterval(intervalId);
+    };
+  }, [activeContact?.other_id]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -49,8 +82,7 @@ export default function Chat() {
   const openConversation = async (contact) => {
     setActiveContact(contact);
     try {
-      const res = await api.get(`/chat/messages/${contact.other_id}`);
-      setMessages(res.data);
+      await loadMessages(contact);
     } catch (err) {
       console.error(err);
     }
@@ -60,15 +92,9 @@ export default function Chat() {
     if (!newMsg.trim() || !activeContact) return;
     setSending(true);
     try {
-      const socket = getSocket();
-      if (socket) {
-        socket.emit('send_message', { receiver_id: activeContact.other_id, content: newMsg });
-      } else {
-        await api.post('/chat/send', { receiver_id: activeContact.other_id, content: newMsg });
-        const res = await api.get(`/chat/messages/${activeContact.other_id}`);
-        setMessages(res.data);
-      }
+      await api.post('/chat/send', { receiver_id: activeContact.other_id, content: newMsg });
       setNewMsg('');
+      await Promise.all([loadMessages(), loadContacts()]);
     } catch (err) {
       console.error(err);
     } finally {
@@ -111,7 +137,7 @@ export default function Chat() {
         <div className="flex-1 card flex flex-col overflow-hidden">
           {!activeContact ? (
             <div className="flex-1 flex items-center justify-center text-gray-400 flex-col gap-2">
-              <div className="text-4xl">💬</div>
+              <div className="text-4xl">MSG</div>
               <div>Select a conversation to start chatting</div>
             </div>
           ) : (
@@ -150,7 +176,7 @@ export default function Chat() {
                   placeholder="Type a message..."
                 />
                 <button onClick={sendMessage} disabled={sending || !newMsg.trim()} className="btn-primary px-4">
-                  {sending ? '...' : '→'}
+                  {sending ? '...' : 'Send'}
                 </button>
               </div>
             </>

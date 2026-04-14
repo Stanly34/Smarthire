@@ -10,7 +10,7 @@ A full-stack web application connecting students and companies through intellige
 | Backend | Node.js + Express.js |
 | Database | PostgreSQL |
 | Auth | JWT + bcrypt |
-| Real-time | Socket.io |
+| Chat | REST API polling |
 | Charts | Recharts |
 
 ---
@@ -20,7 +20,7 @@ A full-stack web application connecting students and companies through intellige
 ```
 New/
 ├── backend/
-│   ├── server.js              # Express + Socket.io server
+│   ├── server.js              # Express API server
 │   ├── .env                   # Environment variables
 │   ├── package.json
 │   ├── db/
@@ -60,7 +60,6 @@ New/
         │   └── AuthContext.jsx
         ├── services/
         │   ├── api.js
-        │   └── socket.js
         ├── components/
         │   ├── Layout.jsx
         │   ├── Sidebar.jsx
@@ -231,3 +230,40 @@ eligible = matchPercent ≥ 50 AND cgpa ≥ minCGPA AND codingScore ≥ minScore
 ## Windows Quick Start
 
 Run `setup.bat` for automated dependency installation.
+
+---
+
+## One-Project Vercel Deployment
+
+This repo is configured to deploy the frontend and backend as one Vercel project:
+
+- Vercel installs both workspaces with `npm ci --prefix frontend && npm ci --prefix backend`.
+- Vercel builds the frontend with `npm run build --prefix frontend`.
+- Static assets are served from `frontend/dist`.
+- `/api/*` requests are handled by the Express app through `api/[...path].js`.
+- React routes are rewritten to `index.html` for SPA navigation.
+
+Required Vercel environment variables:
+
+```env
+DATABASE_URL=postgresql://postgres.uvyibxbwpzmpqbkbdvsk:YOUR_URL_ENCODED_DB_PASSWORD@aws-1-ap-northeast-1.pooler.supabase.com:6543/postgres
+DATABASE_SSL=false
+JWT_SECRET=replace_with_a_strong_secret
+NODE_ENV=production
+```
+
+Optional environment variables:
+
+```env
+FRONTEND_URL=https://your-vercel-domain.vercel.app
+```
+
+Do not set `VITE_API_URL` for the Vercel deployment. The frontend uses relative `/api` requests so the frontend and backend stay on the same domain.
+
+Before validating login or dashboard data, run the schema against Supabase using the SQL Editor, then optionally verify from this machine:
+
+```bash
+npm run db:check
+```
+
+See `docs/supabase.md` for the full Supabase setup checklist.
