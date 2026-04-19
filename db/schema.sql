@@ -135,6 +135,7 @@ ALTER TABLE jobs ADD COLUMN IF NOT EXISTS job_type VARCHAR(50) DEFAULT 'full-tim
 ALTER TABLE jobs ADD COLUMN IF NOT EXISTS min_cgpa DECIMAL(4,2) DEFAULT 0;
 ALTER TABLE coding_problems ADD COLUMN IF NOT EXISTS language VARCHAR(50);
 ALTER TABLE applications ADD COLUMN IF NOT EXISTS updated_at TIMESTAMP DEFAULT NOW();
+CREATE UNIQUE INDEX IF NOT EXISTS coding_problems_title_language_idx ON coding_problems (title, language);
 
 -- Seed default admin
 INSERT INTO users (email, password, role, is_approved)
@@ -152,11 +153,5 @@ INSERT INTO skills (name) VALUES
   ('Data Structures'), ('Algorithms'), ('System Design'), ('PHP'), ('Ruby')
 ON CONFLICT (name) DO NOTHING;
 
--- Seed sample coding problems
-INSERT INTO coding_problems (title, description, difficulty, language, sample_input, sample_output) VALUES
-  ('Reverse a String', 'Write a function to reverse a given string.', 'beginner', 'Python', 'hello', 'olleh'),
-  ('FizzBuzz', 'Print numbers 1 to N. For multiples of 3 print Fizz, for 5 print Buzz, for both print FizzBuzz.', 'beginner', 'JavaScript', '15', 'FizzBuzz'),
-  ('Binary Search', 'Implement binary search on a sorted array.', 'intermediate', 'Java', '[1,3,5,7,9], target=5', '2'),
-  ('Linked List Reversal', 'Reverse a singly linked list.', 'intermediate', 'C++', '1->2->3->4->5', '5->4->3->2->1'),
-  ('Longest Common Subsequence', 'Find the LCS of two strings.', 'advanced', 'Python', 'ABCBDAB, BDCABA', '4')
-ON CONFLICT DO NOTHING;
+-- Seed the full coding practice catalog with:
+--   node scripts/seed_coding_practice.js

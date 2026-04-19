@@ -10,6 +10,8 @@
     "preview": "vite preview",
     "start": "node server.js",
     "db:check": "node scripts/check_db.js",
+    "seed:coding": "node scripts/seed_coding_practice.js",
+    "seed:credentials": "node scripts/seed_demo_credentials.js",
     "seed:demo": "node scripts/seed_demo.js"
   },
   "dependencies": {

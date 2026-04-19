@@ -22,10 +22,13 @@ echo.
 echo 3. Run the schema:
 echo    psql -U postgres -d smarthire -f db/schema.sql
 echo.
-echo 4. Start the full app:
+echo 4. Seed the coding practice catalog:
+echo    npm run seed:coding
+echo.
+echo 5. Start the full app:
 echo    npm run dev
 echo.
-echo 5. Open http://localhost:5173
+echo 6. Open http://localhost:5173
 echo.
 echo Admin Login: admin@smarthire.com / admin123
 echo ============================================

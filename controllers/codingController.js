@@ -8,7 +8,15 @@ const getProblems = async (req, res) => {
     const params = [];
     if (difficulty) { params.push(difficulty); query += ` AND difficulty=$${params.length}`; }
     if (language) { params.push(language); query += ` AND language=$${params.length}`; }
-    query += ' ORDER BY difficulty, id';
+    query += ` ORDER BY
+      CASE difficulty
+        WHEN 'beginner' THEN 1
+        WHEN 'intermediate' THEN 2
+        WHEN 'advanced' THEN 3
+        ELSE 999
+      END,
+      language,
+      title`;
     const result = await db.query(query, params);
     res.json(result.rows);
   } catch (err) {

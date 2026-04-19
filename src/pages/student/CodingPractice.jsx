@@ -3,6 +3,19 @@ import Layout from '../../components/Layout';
 import api from '../../services/api';
 
 const DIFFICULTY_COLOR = { beginner: 'badge-green', intermediate: 'badge-yellow', advanced: 'badge-red' };
+const LANGUAGE_ORDER = ['C++', 'Java', 'JavaScript', 'Python', 'C', 'C#', 'Go', 'TypeScript', 'PHP', 'Rust'];
+const CODE_PLACEHOLDER_BY_LANGUAGE = {
+  'C++': '// Write your C++ code here...\n\n',
+  Java: '// Write your Java code here...\n\n',
+  JavaScript: '// Write your JavaScript code here...\n\n',
+  Python: '# Write your Python code here...\n\n',
+  C: '// Write your C code here...\n\n',
+  'C#': '// Write your C# code here...\n\n',
+  Go: '// Write your Go code here...\n\n',
+  TypeScript: '// Write your TypeScript code here...\n\n',
+  PHP: "<?php\n// Write your PHP code here...\n\n",
+  Rust: '// Write your Rust code here...\n\n',
+};
 
 export default function CodingPractice() {
   const [problems, setProblems] = useState([]);
@@ -60,6 +73,16 @@ export default function CodingPractice() {
     (!filter.difficulty || p.difficulty === filter.difficulty) &&
     (!filter.language || p.language === filter.language)
   );
+  const languageOptions = [...new Set(problems.map(problem => problem.language).filter(Boolean))].sort((left, right) => {
+    const leftIndex = LANGUAGE_ORDER.indexOf(left);
+    const rightIndex = LANGUAGE_ORDER.indexOf(right);
+    const normalizedLeft = leftIndex === -1 ? Number.MAX_SAFE_INTEGER : leftIndex;
+    const normalizedRight = rightIndex === -1 ? Number.MAX_SAFE_INTEGER : rightIndex;
+
+    if (normalizedLeft !== normalizedRight) return normalizedLeft - normalizedRight;
+    return left.localeCompare(right);
+  });
+  const codePlaceholder = selected ? (CODE_PLACEHOLDER_BY_LANGUAGE[selected.language] || `// Write your ${selected.language} code here...\n\n`) : '';
 
   return (
     <Layout title="Coding Practice">
@@ -114,24 +137,28 @@ export default function CodingPractice() {
                 </select>
                 <select className="input text-sm" value={filter.language} onChange={e => setFilter({...filter, language: e.target.value})}>
                   <option value="">All Languages</option>
-                  {['Python','JavaScript','Java','C++','C'].map(l => <option key={l}>{l}</option>)}
+                  {languageOptions.map(language => <option key={language}>{language}</option>)}
                 </select>
               </div>
             </div>
             <div className="space-y-2">
-              {filtered.map(p => (
-                <button
-                  key={p.id}
-                  onClick={() => handleSelect(p)}
-                  className={`w-full text-left p-3 rounded-lg border transition-all ${selected?.id === p.id ? 'border-blue-500 bg-blue-50' : 'border-gray-200 bg-white hover:border-blue-300'}`}
-                >
-                  <div className="font-medium text-sm">{p.title}</div>
-                  <div className="flex gap-2 mt-1">
-                    <span className={`badge text-xs ${DIFFICULTY_COLOR[p.difficulty]}`}>{p.difficulty}</span>
-                    <span className="badge badge-gray text-xs">{p.language}</span>
-                  </div>
-                </button>
-              ))}
+              {filtered.length === 0 ? (
+                <div className="card text-sm text-gray-500">No coding tasks match the selected filters.</div>
+              ) : (
+                filtered.map(p => (
+                  <button
+                    key={p.id}
+                    onClick={() => handleSelect(p)}
+                    className={`w-full text-left p-3 rounded-lg border transition-all ${selected?.id === p.id ? 'border-blue-500 bg-blue-50' : 'border-gray-200 bg-white hover:border-blue-300'}`}
+                  >
+                    <div className="font-medium text-sm">{p.title}</div>
+                    <div className="flex gap-2 mt-1">
+                      <span className={`badge text-xs ${DIFFICULTY_COLOR[p.difficulty]}`}>{p.difficulty}</span>
+                      <span className="badge badge-gray text-xs">{p.language}</span>
+                    </div>
+                  </button>
+                ))
+              )}
             </div>
           </div>
 
@@ -176,7 +203,7 @@ export default function CodingPractice() {
                   rows={14}
                   value={code}
                   onChange={e => setCode(e.target.value)}
-                  placeholder={`# Write your ${selected.language} code here...\n\n`}
+                  placeholder={codePlaceholder}
                 />
 
                 {feedback && (

@@ -34,10 +34,11 @@ async function main() {
 
   const checks = [];
   if (missingTables.length === 0) {
-    const [adminResult, skillsResult, problemsResult] = await Promise.all([
+    const [adminResult, skillsResult, problemsResult, languageResult] = await Promise.all([
       db.query("SELECT COUNT(*)::int AS count FROM users WHERE email = 'admin@smarthire.com'"),
       db.query('SELECT COUNT(*)::int AS count FROM skills'),
       db.query('SELECT COUNT(*)::int AS count FROM coding_problems'),
+      db.query('SELECT COUNT(DISTINCT language)::int AS count FROM coding_problems WHERE language IS NOT NULL'),
     ]);
 
     checks.push({
@@ -52,8 +53,13 @@ async function main() {
     });
     checks.push({
       label: 'coding problems',
-      passed: problemsResult.rows[0].count > 0,
+      passed: problemsResult.rows[0].count === 100,
       detail: `${problemsResult.rows[0].count} row(s)`,
+    });
+    checks.push({
+      label: 'coding languages',
+      passed: languageResult.rows[0].count === 10,
+      detail: `${languageResult.rows[0].count} distinct language(s)`,
     });
   }
 

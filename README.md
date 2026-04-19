@@ -72,9 +72,14 @@ For local PostgreSQL:
 ```bash
 psql -U postgres -c "CREATE DATABASE smarthire;"
 psql -U postgres -d smarthire -f db/schema.sql
+npm run seed:coding
 ```
 
-For Supabase, run the contents of `db/schema.sql` in the Supabase SQL Editor.
+For Supabase, run the contents of `db/schema.sql` in the Supabase SQL Editor, then run:
+
+```bash
+npm run seed:coding
+```
 
 ### Step 4: Start The App
 
@@ -174,6 +179,7 @@ npm run build
 npm run preview
 npm run start
 npm run db:check
+npm run seed:coding
 npm run seed:demo
 ```
 
