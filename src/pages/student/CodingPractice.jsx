@@ -335,14 +335,6 @@ export default function CodingPractice() {
 
                 <div className="mb-3">
                   <p className="text-sm text-gray-300 whitespace-pre-line">{currentState.current_problem.description}</p>
-                  <div className="mt-2 space-y-1 text-xs text-gray-400">
-                    <div>
-                      <span className="font-semibold text-gray-300">Sample Input:</span> {currentState.current_problem.sample_input}
-                    </div>
-                    <div>
-                      <span className="font-semibold text-gray-300">Sample Output:</span> {currentState.current_problem.sample_output}
-                    </div>
-                  </div>
                 </div>
 
                 <textarea
