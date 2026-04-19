@@ -21,7 +21,6 @@ function formatProblem(problem) {
     task_number: problem.task_number,
     sample_input: problem.sample_input,
     sample_output: problem.sample_output,
-    starter_code: problem.starter_code,
   };
 }
 
@@ -45,7 +44,7 @@ const getProblems = async (req, res) => {
     let query = `
       SELECT
         id, title, description, difficulty, language, language_level,
-        task_number, sample_input, sample_output, starter_code
+        task_number, sample_input, sample_output
       FROM coding_problems
       WHERE COALESCE(is_active, TRUE) = TRUE
     `;
@@ -75,7 +74,7 @@ const getProblemById = async (req, res) => {
     const result = await db.query(
       `SELECT
          id, title, description, difficulty, language, language_level,
-         task_number, sample_input, sample_output, starter_code
+         task_number, sample_input, sample_output
        FROM coding_problems
        WHERE id = $1 AND COALESCE(is_active, TRUE) = TRUE`,
       [req.params.id]

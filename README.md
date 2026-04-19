@@ -61,7 +61,7 @@ DATABASE_URL=postgresql://postgres:YOUR_PASSWORD@localhost:5432/smarthire
 JWT_SECRET=smarthire_super_secret_jwt_key_2025
 NODE_ENV=development
 FRONTEND_URL=http://localhost:5173
-JUDGE0_URL=https://your-judge0-host
+JUDGE0_URL=https://ce.judge0.com
 JUDGE0_API_KEY=
 ```
 
@@ -207,7 +207,7 @@ DATABASE_URL=postgresql://postgres.uvyibxbwpzmpqbkbdvsk:YOUR_URL_ENCODED_DB_PASS
 DATABASE_SSL=false
 JWT_SECRET=replace_with_a_strong_secret
 NODE_ENV=production
-JUDGE0_URL=https://your-judge0-host
+JUDGE0_URL=https://ce.judge0.com
 ```
 
 Optional environment variables:

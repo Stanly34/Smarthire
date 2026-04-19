@@ -23,6 +23,9 @@ export default function CodingPractice() {
   const [loading, setLoading] = useState(true);
   const [loadingCurrent, setLoadingCurrent] = useState(false);
 
+  const getCodePlaceholder = language =>
+    `Write your ${language} code here.\nUse stdin for input and print only the required output.`;
+
   const groupedProgress = useMemo(
     () =>
       LEVEL_ORDER.map(level => ({
@@ -65,7 +68,7 @@ export default function CodingPractice() {
     try {
       const response = await api.get('/coding/current', { params: { language } });
       setCurrentState(response.data);
-      setCode(response.data.current_problem?.starter_code || '');
+      setCode('');
       setFeedback(null);
     } catch (error) {
       console.error('Failed to load current coding task:', error);
@@ -131,7 +134,7 @@ export default function CodingPractice() {
             is_completed: false,
             current_problem: response.data.unlocked_next_task,
           } : prev));
-          setCode(response.data.unlocked_next_task.starter_code || '');
+          setCode('');
         } else {
           setCurrentState(prev => (prev ? {
             ...prev,
@@ -300,7 +303,7 @@ export default function CodingPractice() {
                 <div className="flex items-center justify-between mb-4">
                   <div>
                     <div className="text-xs uppercase tracking-wide text-gray-500 mb-1">
-                      {selectedLanguage} · Task {currentState.current_problem.task_number} of {currentState.total_tasks}
+                      {selectedLanguage} - Task {currentState.current_problem.task_number} of {currentState.total_tasks}
                     </div>
                     <h3 className="text-lg font-bold">{currentState.current_problem.title}</h3>
                     <div className="flex gap-2 mt-1">
@@ -346,6 +349,7 @@ export default function CodingPractice() {
                   rows={18}
                   value={code}
                   onChange={event => setCode(event.target.value)}
+                  placeholder={getCodePlaceholder(selectedLanguage)}
                 />
 
                 {feedback && (

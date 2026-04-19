@@ -5,6 +5,7 @@ const PROCESSING_STATUS = 2;
 const ACCEPTED_STATUS = 3;
 const POLL_ATTEMPTS = 20;
 const POLL_DELAY_MS = 500;
+const DEFAULT_JUDGE0_URL = 'https://ce.judge0.com';
 
 let languageCache = null;
 
@@ -13,11 +14,7 @@ function sleep(ms) {
 }
 
 function getJudge0BaseUrl() {
-  if (!process.env.JUDGE0_URL) {
-    throw new Error('JUDGE0_URL is not configured.');
-  }
-
-  return process.env.JUDGE0_URL.replace(/\/+$/, '');
+  return (process.env.JUDGE0_URL || DEFAULT_JUDGE0_URL).replace(/\/+$/, '');
 }
 
 function getJudge0Headers() {
@@ -103,7 +100,7 @@ async function createSubmissionBatch(submissions) {
     { headers: getJudge0Headers() }
   );
 
-  return response.data;
+  return Array.isArray(response.data) ? response.data : response.data?.submissions || [];
 }
 
 async function fetchSubmissionBatch(tokens) {
@@ -116,7 +113,7 @@ async function fetchSubmissionBatch(tokens) {
     },
   });
 
-  return response.data;
+  return Array.isArray(response.data) ? response.data : response.data?.submissions || [];
 }
 
 async function waitForBatchResults(tokens) {
