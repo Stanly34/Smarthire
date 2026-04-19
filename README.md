@@ -61,6 +61,8 @@ DATABASE_URL=postgresql://postgres:YOUR_PASSWORD@localhost:5432/smarthire
 JWT_SECRET=smarthire_super_secret_jwt_key_2025
 NODE_ENV=development
 FRONTEND_URL=http://localhost:5173
+JUDGE0_URL=https://your-judge0-host
+JUDGE0_API_KEY=
 ```
 
 For Supabase, use the pooler value documented in `docs/supabase.md`.
@@ -125,6 +127,7 @@ Students and companies must register and get approved by the admin.
 - Browse and apply for jobs
 - Track application status
 - Coding practice in practice and scored modes
+- Progressive coding practice with one unlocked task per language
 - Chat with companies through REST polling
 
 ### Company Features
@@ -165,6 +168,8 @@ eligible = matchPercent >= 50 AND cgpa >= minCGPA AND codingScore >= minScore
 | GET | /api/admin/pending-users | Pending approvals |
 | PUT | /api/admin/approve-user/:id | Approve user |
 | GET | /api/coding/problems | Coding problems |
+| GET | /api/coding/progress/me | Coding progress by language |
+| GET | /api/coding/current?language=Python | Current unlocked task for a language |
 | POST | /api/coding/submit | Submit code |
 | GET | /api/chat/messages/:userId | Get messages |
 | POST | /api/chat/send | Send message |
@@ -202,12 +207,14 @@ DATABASE_URL=postgresql://postgres.uvyibxbwpzmpqbkbdvsk:YOUR_URL_ENCODED_DB_PASS
 DATABASE_SSL=false
 JWT_SECRET=replace_with_a_strong_secret
 NODE_ENV=production
+JUDGE0_URL=https://your-judge0-host
 ```
 
 Optional environment variables:
 
 ```env
 FRONTEND_URL=https://your-vercel-domain.vercel.app
+JUDGE0_API_KEY=
 ```
 
 Do not set `VITE_API_URL` for the Vercel deployment. The web app uses relative `/api` requests so UI and API stay on the same domain.

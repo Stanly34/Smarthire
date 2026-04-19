@@ -12,6 +12,7 @@ const requiredTables = [
   'applications',
   'coding_problems',
   'coding_results',
+  'coding_progress',
   'messages',
 ];
 
@@ -37,8 +38,8 @@ async function main() {
     const [adminResult, skillsResult, problemsResult, languageResult] = await Promise.all([
       db.query("SELECT COUNT(*)::int AS count FROM users WHERE email = 'admin@smarthire.com'"),
       db.query('SELECT COUNT(*)::int AS count FROM skills'),
-      db.query('SELECT COUNT(*)::int AS count FROM coding_problems'),
-      db.query('SELECT COUNT(DISTINCT language)::int AS count FROM coding_problems WHERE language IS NOT NULL'),
+      db.query('SELECT COUNT(*)::int AS count FROM coding_problems WHERE COALESCE(is_active, TRUE) = TRUE'),
+      db.query('SELECT COUNT(DISTINCT language)::int AS count FROM coding_problems WHERE COALESCE(is_active, TRUE) = TRUE AND language IS NOT NULL'),
     ]);
 
     checks.push({

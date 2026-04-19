@@ -1,123 +1,214 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Layout from '../../components/Layout';
 import api from '../../services/api';
 
-const DIFFICULTY_COLOR = { beginner: 'badge-green', intermediate: 'badge-yellow', advanced: 'badge-red' };
-const LANGUAGE_ORDER = ['C++', 'Java', 'JavaScript', 'Python', 'C', 'C#', 'Go', 'TypeScript', 'PHP', 'Rust'];
-const CODE_PLACEHOLDER_BY_LANGUAGE = {
-  'C++': '// Write your C++ code here...\n\n',
-  Java: '// Write your Java code here...\n\n',
-  JavaScript: '// Write your JavaScript code here...\n\n',
-  Python: '# Write your Python code here...\n\n',
-  C: '// Write your C code here...\n\n',
-  'C#': '// Write your C# code here...\n\n',
-  Go: '// Write your Go code here...\n\n',
-  TypeScript: '// Write your TypeScript code here...\n\n',
-  PHP: "<?php\n// Write your PHP code here...\n\n",
-  Rust: '// Write your Rust code here...\n\n',
+const LEVEL_ORDER = ['beginner', 'intermediate', 'advanced'];
+const LEVEL_TITLES = {
+  beginner: 'Beginner Languages',
+  intermediate: 'Intermediate Languages',
+  advanced: 'Advanced Languages',
 };
+const DIFFICULTY_COLOR = { beginner: 'badge-green', intermediate: 'badge-yellow', advanced: 'badge-red' };
 
 export default function CodingPractice() {
-  const [problems, setProblems] = useState([]);
+  const [progress, setProgress] = useState([]);
   const [results, setResults] = useState([]);
-  const [selected, setSelected] = useState(null);
+  const [selectedLanguage, setSelectedLanguage] = useState('');
+  const [currentState, setCurrentState] = useState(null);
   const [code, setCode] = useState('');
   const [mode, setMode] = useState('practice');
   const [submitting, setSubmitting] = useState(false);
   const [feedback, setFeedback] = useState(null);
-  const [filter, setFilter] = useState({ difficulty: '', language: '' });
-  const [tab, setTab] = useState('problems'); // 'problems' | 'results'
+  const [tab, setTab] = useState('problems');
+  const [loading, setLoading] = useState(true);
+  const [loadingCurrent, setLoadingCurrent] = useState(false);
+
+  const groupedProgress = useMemo(
+    () =>
+      LEVEL_ORDER.map(level => ({
+        level,
+        title: LEVEL_TITLES[level],
+        items: progress.filter(item => item.language_level === level),
+      })).filter(group => group.items.length > 0),
+    [progress]
+  );
+
+  const selectedProgress = progress.find(item => item.language === selectedLanguage) || null;
+
+  const refreshOverview = async (preferredLanguage) => {
+    const [progressResponse, resultsResponse] = await Promise.all([
+      api.get('/coding/progress/me'),
+      api.get('/coding/results/me'),
+    ]);
+
+    setProgress(progressResponse.data);
+    setResults(resultsResponse.data);
+
+    const availableLanguage =
+      (preferredLanguage && progressResponse.data.find(item => item.language === preferredLanguage)?.language) ||
+      progressResponse.data.find(item => !item.is_completed)?.language ||
+      progressResponse.data[0]?.language ||
+      '';
+
+    setSelectedLanguage(current => (current && progressResponse.data.some(item => item.language === current) ? current : availableLanguage));
+    return progressResponse.data;
+  };
+
+  const loadCurrentProblem = async language => {
+    if (!language) {
+      setCurrentState(null);
+      setCode('');
+      return;
+    }
+
+    setLoadingCurrent(true);
+    try {
+      const response = await api.get('/coding/current', { params: { language } });
+      setCurrentState(response.data);
+      setCode(response.data.current_problem?.starter_code || '');
+      setFeedback(null);
+    } catch (error) {
+      console.error('Failed to load current coding task:', error);
+      setCurrentState(null);
+      setCode('');
+    } finally {
+      setLoadingCurrent(false);
+    }
+  };
 
   useEffect(() => {
     const load = async () => {
+      setLoading(true);
       try {
-        const [p, r] = await Promise.all([api.get('/coding/problems'), api.get('/coding/results/me')]);
-        setProblems(p.data);
-        setResults(r.data);
-      } catch (err) {
-        console.error('Failed to load coding data:', err);
+        const progressRows = await refreshOverview();
+        const firstLanguage =
+          progressRows.find(item => !item.is_completed)?.language ||
+          progressRows[0]?.language ||
+          '';
+
+        if (firstLanguage) {
+          setSelectedLanguage(firstLanguage);
+        }
+      } catch (error) {
+        console.error('Failed to load coding practice overview:', error);
+      } finally {
+        setLoading(false);
       }
     };
+
     load();
   }, []);
 
-  const handleSelect = (problem) => {
-    setSelected(problem);
-    setCode('');
-    setFeedback(null);
-  };
+  useEffect(() => {
+    if (selectedLanguage) {
+      loadCurrentProblem(selectedLanguage);
+    }
+  }, [selectedLanguage]);
 
   const handleSubmit = async () => {
-    if (!code.trim()) return;
+    const currentProblem = currentState?.current_problem;
+    if (!currentProblem || !code.trim()) return;
+
     setSubmitting(true);
     setFeedback(null);
+
     try {
-      const res = await api.post('/coding/submit', {
-        problem_id: selected.id,
+      const response = await api.post('/coding/submit', {
+        problem_id: currentProblem.id,
         submitted_code: code,
         mode,
-        language: selected.language,
       });
-      setFeedback(res.data);
-      // refresh results
-      const r = await api.get('/coding/results/me');
-      setResults(r.data);
-    } catch (err) {
-      setFeedback({ passed: false, message: err.response?.data?.message || 'Submission failed' });
+
+      setFeedback(response.data);
+      await refreshOverview(selectedLanguage);
+
+      if (response.data.passed) {
+        if (response.data.unlocked_next_task) {
+          setCurrentState(prev => (prev ? {
+            ...prev,
+            completed_count: response.data.completed_count,
+            current_task_number: response.data.current_task_number,
+            is_completed: false,
+            current_problem: response.data.unlocked_next_task,
+          } : prev));
+          setCode(response.data.unlocked_next_task.starter_code || '');
+        } else {
+          setCurrentState(prev => (prev ? {
+            ...prev,
+            completed_count: response.data.completed_count,
+            current_task_number: response.data.current_task_number,
+            is_completed: true,
+            current_problem: null,
+          } : prev));
+          setCode('');
+        }
+      }
+    } catch (error) {
+      setFeedback({
+        passed: false,
+        message: error.response?.data?.message || 'Submission failed',
+        feedback: error.response?.data?.message,
+      });
     } finally {
       setSubmitting(false);
     }
   };
 
-  const filtered = problems.filter(p =>
-    (!filter.difficulty || p.difficulty === filter.difficulty) &&
-    (!filter.language || p.language === filter.language)
-  );
-  const languageOptions = [...new Set(problems.map(problem => problem.language).filter(Boolean))].sort((left, right) => {
-    const leftIndex = LANGUAGE_ORDER.indexOf(left);
-    const rightIndex = LANGUAGE_ORDER.indexOf(right);
-    const normalizedLeft = leftIndex === -1 ? Number.MAX_SAFE_INTEGER : leftIndex;
-    const normalizedRight = rightIndex === -1 ? Number.MAX_SAFE_INTEGER : rightIndex;
-
-    if (normalizedLeft !== normalizedRight) return normalizedLeft - normalizedRight;
-    return left.localeCompare(right);
-  });
-  const codePlaceholder = selected ? (CODE_PLACEHOLDER_BY_LANGUAGE[selected.language] || `// Write your ${selected.language} code here...\n\n`) : '';
-
   return (
     <Layout title="Coding Practice">
       <div className="flex gap-4 mb-6">
-        <button onClick={() => setTab('problems')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab === 'problems' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
-          💻 Problems
+        <button
+          onClick={() => setTab('problems')}
+          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab === 'problems' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+        >
+          Problems
         </button>
-        <button onClick={() => setTab('results')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab === 'results' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
-          📊 My Results ({results.length})
+        <button
+          onClick={() => setTab('results')}
+          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab === 'results' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+        >
+          My Results ({results.length})
         </button>
       </div>
 
       {tab === 'results' ? (
         <div className="card">
           <h3 className="text-lg font-bold mb-4">Submission History</h3>
-          {results.length === 0 ? <p className="text-gray-500">No submissions yet.</p> : (
+          {results.length === 0 ? (
+            <p className="text-gray-500">No submissions yet.</p>
+          ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead className="text-left text-gray-500 border-b">
                   <tr>
+                    <th className="pb-2">Language</th>
+                    <th className="pb-2">Task</th>
                     <th className="pb-2">Problem</th>
-                    <th className="pb-2">Difficulty</th>
+                    <th className="pb-2">Status</th>
                     <th className="pb-2">Mode</th>
                     <th className="pb-2">Score</th>
                     <th className="pb-2">Date</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y">
-                  {results.map(r => (
-                    <tr key={r.id}>
-                      <td className="py-2 font-medium">{r.title}</td>
-                      <td className="py-2 capitalize">{r.difficulty}</td>
-                      <td className="py-2 capitalize">{r.mode}</td>
-                      <td className="py-2"><span className={`badge ${r.score >= 70 ? 'badge-green' : 'badge-red'}`}>{r.score}</span></td>
-                      <td className="py-2 text-gray-500">{new Date(r.submitted_at).toLocaleDateString()}</td>
+                  {results.map(result => (
+                    <tr key={result.id}>
+                      <td className="py-2">
+                        <div className="font-medium">{result.language}</div>
+                        <div className="text-xs text-gray-500 capitalize">{result.language_level || result.difficulty || 'legacy'}</div>
+                      </td>
+                      <td className="py-2">{result.task_number ? `Task ${result.task_number}` : 'Legacy'}</td>
+                      <td className="py-2 font-medium">{result.title}</td>
+                      <td className="py-2">
+                        <span className={`badge ${
+                          result.passed === true ? 'badge-green' : result.passed === false ? 'badge-red' : 'badge-gray'
+                        }`}>
+                          {result.passed === true ? 'Passed' : result.passed === false ? 'Failed' : 'Legacy'}
+                        </span>
+                      </td>
+                      <td className="py-2 capitalize">{result.mode}</td>
+                      <td className="py-2">{result.score}</td>
+                      <td className="py-2 text-gray-500">{new Date(result.submitted_at).toLocaleDateString()}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -127,95 +218,146 @@ export default function CodingPractice() {
         </div>
       ) : (
         <div className="grid lg:grid-cols-5 gap-6">
-          {/* Problem list */}
           <div className="lg:col-span-2">
             <div className="card mb-4">
-              <div className="flex gap-2">
-                <select className="input text-sm" value={filter.difficulty} onChange={e => setFilter({...filter, difficulty: e.target.value})}>
-                  <option value="">All Levels</option>
-                  {['beginner','intermediate','advanced'].map(d => <option key={d} value={d} className="capitalize">{d}</option>)}
-                </select>
-                <select className="input text-sm" value={filter.language} onChange={e => setFilter({...filter, language: e.target.value})}>
-                  <option value="">All Languages</option>
-                  {languageOptions.map(language => <option key={language}>{language}</option>)}
-                </select>
-              </div>
+              <h3 className="text-lg font-bold mb-2">Language Progress</h3>
+              <p className="text-sm text-gray-500">
+                Each language unlocks one coding task at a time. Pass the current task to see the next one.
+              </p>
             </div>
-            <div className="space-y-2">
-              {filtered.length === 0 ? (
-                <div className="card text-sm text-gray-500">No coding tasks match the selected filters.</div>
-              ) : (
-                filtered.map(p => (
-                  <button
-                    key={p.id}
-                    onClick={() => handleSelect(p)}
-                    className={`w-full text-left p-3 rounded-lg border transition-all ${selected?.id === p.id ? 'border-blue-500 bg-blue-50' : 'border-gray-200 bg-white hover:border-blue-300'}`}
-                  >
-                    <div className="font-medium text-sm">{p.title}</div>
-                    <div className="flex gap-2 mt-1">
-                      <span className={`badge text-xs ${DIFFICULTY_COLOR[p.difficulty]}`}>{p.difficulty}</span>
-                      <span className="badge badge-gray text-xs">{p.language}</span>
+
+            {loading ? (
+              <div className="card text-sm text-gray-500">Loading coding practice...</div>
+            ) : groupedProgress.length === 0 ? (
+              <div className="card text-sm text-gray-500">No coding languages are available yet.</div>
+            ) : (
+              <div className="space-y-4">
+                {groupedProgress.map(group => (
+                  <div key={group.level}>
+                    <div className="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">{group.title}</div>
+                    <div className="space-y-2">
+                      {group.items.map(item => (
+                        <button
+                          key={item.language}
+                          onClick={() => setSelectedLanguage(item.language)}
+                          className={`w-full text-left p-3 rounded-lg border transition-all ${selectedLanguage === item.language ? 'border-blue-500 bg-blue-50' : 'border-gray-200 bg-white hover:border-blue-300'}`}
+                        >
+                          <div className="flex items-center justify-between gap-2">
+                            <div>
+                              <div className="font-medium text-sm">{item.language}</div>
+                              <div className="flex gap-2 mt-1">
+                                <span className={`badge text-xs ${DIFFICULTY_COLOR[item.language_level]}`}>{item.language_level}</span>
+                                <span className="badge badge-gray text-xs">
+                                  {item.is_completed ? 'Completed' : `Task ${Math.min(item.current_task_number, item.total_tasks)} / ${item.total_tasks}`}
+                                </span>
+                              </div>
+                            </div>
+                            <div className="text-xs text-gray-500">
+                              {item.is_completed ? '10 / 10' : `${item.completed_count} / ${item.total_tasks}`}
+                            </div>
+                          </div>
+                        </button>
+                      ))}
                     </div>
-                  </button>
-                ))
-              )}
-            </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
-          {/* Editor */}
           <div className="lg:col-span-3">
-            {!selected ? (
+            {!selectedLanguage ? (
               <div className="card h-full flex items-center justify-center text-gray-400 text-center py-20">
-                Select a problem from the list to start coding
+                Select a language to start solving code tasks.
+              </div>
+            ) : loadingCurrent ? (
+              <div className="card h-full flex items-center justify-center text-gray-400 text-center py-20">
+                Loading the current task...
+              </div>
+            ) : currentState?.is_completed ? (
+              <div className="card">
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <h3 className="text-lg font-bold">{selectedLanguage}</h3>
+                    <div className="flex gap-2 mt-1">
+                      <span className={`badge ${DIFFICULTY_COLOR[selectedProgress?.language_level || currentState.language_level]}`}>
+                        {selectedProgress?.language_level || currentState.language_level}
+                      </span>
+                      <span className="badge badge-gray">Completed 10 / 10</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-green-50 border border-green-200 text-green-800 rounded-lg p-4 text-sm">
+                  You completed all coding tasks for {selectedLanguage}. Pick another language from the left to continue.
+                </div>
+              </div>
+            ) : !currentState?.current_problem ? (
+              <div className="card h-full flex items-center justify-center text-gray-400 text-center py-20">
+                No unlocked task is available for this language right now.
               </div>
             ) : (
               <div className="card">
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <h3 className="text-lg font-bold">{selected.title}</h3>
+                    <div className="text-xs uppercase tracking-wide text-gray-500 mb-1">
+                      {selectedLanguage} · Task {currentState.current_problem.task_number} of {currentState.total_tasks}
+                    </div>
+                    <h3 className="text-lg font-bold">{currentState.current_problem.title}</h3>
                     <div className="flex gap-2 mt-1">
-                      <span className={`badge ${DIFFICULTY_COLOR[selected.difficulty]}`}>{selected.difficulty}</span>
-                      <span className="badge badge-gray">{selected.language}</span>
+                      <span className={`badge ${DIFFICULTY_COLOR[currentState.language_level]}`}>{currentState.language_level}</span>
+                      <span className="badge badge-gray">{selectedLanguage}</span>
                     </div>
                   </div>
                   <div className="flex gap-2 text-sm">
-                    <button onClick={() => setMode('practice')} className={`px-3 py-1 rounded-lg transition-colors ${mode === 'practice' ? 'bg-gray-700 text-white' : 'bg-gray-100 text-gray-600'}`}>Practice</button>
-                    <button onClick={() => setMode('score')} className={`px-3 py-1 rounded-lg transition-colors ${mode === 'score' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600'}`}>Scored</button>
+                    <button
+                      onClick={() => setMode('practice')}
+                      className={`px-3 py-1 rounded-lg transition-colors ${mode === 'practice' ? 'bg-gray-700 text-white' : 'bg-gray-100 text-gray-600'}`}
+                    >
+                      Practice
+                    </button>
+                    <button
+                      onClick={() => setMode('score')}
+                      className={`px-3 py-1 rounded-lg transition-colors ${mode === 'score' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600'}`}
+                    >
+                      Scored
+                    </button>
                   </div>
                 </div>
 
                 {mode === 'score' && (
                   <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 text-xs p-2 rounded mb-3">
-                    Score mode: Your result will be saved and visible to companies.
+                    Score mode: a passing solution updates your coding score and also unlocks the next task.
                   </div>
                 )}
 
                 <div className="bg-gray-50 border rounded-lg p-3 mb-3">
-                  <p className="text-sm text-gray-700 mb-2">{selected.description}</p>
-                  <div className="text-xs text-gray-500">
-                    <span className="font-semibold">Sample Input:</span> {selected.sample_input}<br />
-                    <span className="font-semibold">Sample Output:</span> {selected.sample_output}
+                  <p className="text-sm text-gray-700 whitespace-pre-line mb-2">{currentState.current_problem.description}</p>
+                  <div className="text-xs text-gray-500 whitespace-pre-line">
+                    <span className="font-semibold">Sample Input:</span>{'\n'}
+                    {currentState.current_problem.sample_input}
+                    {'\n'}
+                    <span className="font-semibold">Sample Output:</span>{'\n'}
+                    {currentState.current_problem.sample_output}
                   </div>
                 </div>
 
                 <textarea
                   className="w-full font-mono text-sm bg-gray-900 text-green-400 p-4 rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  rows={14}
+                  rows={18}
                   value={code}
-                  onChange={e => setCode(e.target.value)}
-                  placeholder={codePlaceholder}
+                  onChange={event => setCode(event.target.value)}
                 />
 
                 {feedback && (
                   <div className={`mt-3 p-3 rounded-lg text-sm ${feedback.passed ? 'bg-green-50 border border-green-200 text-green-800' : 'bg-red-50 border border-red-200 text-red-800'}`}>
-                    <div className="font-semibold">{feedback.passed ? '✅ ' : '❌ '}{feedback.message}</div>
+                    <div className="font-semibold">{feedback.message}</div>
                     {feedback.score !== undefined && <div className="mt-1">Score: {feedback.score}/100</div>}
                     {feedback.feedback && <div className="mt-1 text-xs">{feedback.feedback}</div>}
                   </div>
                 )}
 
                 <button onClick={handleSubmit} disabled={submitting || !code.trim()} className="btn-primary mt-3 w-full">
-                  {submitting ? 'Submitting...' : `Submit Code (${mode} mode)`}
+                  {submitting ? 'Running tests...' : `Submit Code (${mode} mode)`}
                 </button>
               </div>
             )}

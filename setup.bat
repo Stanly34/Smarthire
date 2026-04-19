@@ -15,6 +15,7 @@ echo   NEXT STEPS:
 echo ============================================
 echo.
 echo 1. Configure .env in the project root
+echo    Include DATABASE_URL, JWT_SECRET, FRONTEND_URL, and JUDGE0_URL
 echo.
 echo 2. For local PostgreSQL, create the database:
 echo    psql -U postgres -c "CREATE DATABASE smarthire;"

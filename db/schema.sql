@@ -99,8 +99,13 @@ CREATE TABLE IF NOT EXISTS coding_problems (
   description TEXT NOT NULL,
   difficulty VARCHAR(20) CHECK (difficulty IN ('beginner', 'intermediate', 'advanced')),
   language VARCHAR(50),
+  task_number INTEGER,
+  language_level VARCHAR(20),
+  starter_code TEXT,
   sample_input TEXT,
   sample_output TEXT,
+  test_cases JSONB,
+  is_active BOOLEAN DEFAULT TRUE,
   created_at TIMESTAMP DEFAULT NOW()
 );
 
@@ -110,9 +115,22 @@ CREATE TABLE IF NOT EXISTS coding_results (
   student_id INTEGER REFERENCES students(id) ON DELETE CASCADE,
   problem_id INTEGER REFERENCES coding_problems(id) ON DELETE CASCADE,
   score INTEGER DEFAULT 0,
+  passed BOOLEAN DEFAULT FALSE,
   mode VARCHAR(20) CHECK (mode IN ('practice', 'score')),
   submitted_code TEXT,
   submitted_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Coding progress table
+CREATE TABLE IF NOT EXISTS coding_progress (
+  id SERIAL PRIMARY KEY,
+  student_id INTEGER REFERENCES students(id) ON DELETE CASCADE,
+  language VARCHAR(50) NOT NULL,
+  current_task_number INTEGER DEFAULT 1,
+  completed_count INTEGER DEFAULT 0,
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+  UNIQUE(student_id, language)
 );
 
 -- Messages table (real-time chat)
@@ -134,8 +152,25 @@ ALTER TABLE students ADD COLUMN IF NOT EXISTS github_url VARCHAR(500);
 ALTER TABLE jobs ADD COLUMN IF NOT EXISTS job_type VARCHAR(50) DEFAULT 'full-time';
 ALTER TABLE jobs ADD COLUMN IF NOT EXISTS min_cgpa DECIMAL(4,2) DEFAULT 0;
 ALTER TABLE coding_problems ADD COLUMN IF NOT EXISTS language VARCHAR(50);
+ALTER TABLE coding_problems ADD COLUMN IF NOT EXISTS task_number INTEGER;
+ALTER TABLE coding_problems ADD COLUMN IF NOT EXISTS language_level VARCHAR(20);
+ALTER TABLE coding_problems ADD COLUMN IF NOT EXISTS starter_code TEXT;
+ALTER TABLE coding_problems ADD COLUMN IF NOT EXISTS test_cases JSONB;
+ALTER TABLE coding_problems ADD COLUMN IF NOT EXISTS is_active BOOLEAN DEFAULT TRUE;
+ALTER TABLE coding_results ADD COLUMN IF NOT EXISTS submitted_code TEXT;
+ALTER TABLE coding_results ADD COLUMN IF NOT EXISTS passed BOOLEAN DEFAULT FALSE;
 ALTER TABLE applications ADD COLUMN IF NOT EXISTS updated_at TIMESTAMP DEFAULT NOW();
-CREATE UNIQUE INDEX IF NOT EXISTS coding_problems_title_language_idx ON coding_problems (title, language);
+UPDATE coding_problems SET is_active = TRUE WHERE is_active IS NULL;
+UPDATE coding_results SET passed = score >= 70 WHERE passed IS NULL;
+DROP INDEX IF EXISTS coding_problems_title_language_idx;
+CREATE UNIQUE INDEX IF NOT EXISTS coding_problems_active_language_task_idx
+  ON coding_problems (language, task_number)
+  WHERE is_active = TRUE;
+CREATE UNIQUE INDEX IF NOT EXISTS coding_problems_active_title_language_idx
+  ON coding_problems (title, language)
+  WHERE is_active = TRUE;
+CREATE UNIQUE INDEX IF NOT EXISTS coding_progress_student_language_idx
+  ON coding_progress (student_id, language);
 
 -- Seed default admin
 INSERT INTO users (email, password, role, is_approved)
