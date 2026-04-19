@@ -74,12 +74,14 @@ For local PostgreSQL:
 ```bash
 psql -U postgres -c "CREATE DATABASE smarthire;"
 psql -U postgres -d smarthire -f db/schema.sql
+npm run seed:users
 npm run seed:coding
 ```
 
 For Supabase, run the contents of `db/schema.sql` in the Supabase SQL Editor, then run:
 
 ```bash
+npm run seed:users
 npm run seed:coding
 ```
 
@@ -107,7 +109,12 @@ npm run dev:web
 |------|-------|----------|
 | Admin | admin@smarthire.com | admin123 |
 
-Students and companies must register and get approved by the admin.
+The repo includes two demo-user seed paths:
+
+- `npm run seed:credentials` adds only the minimal login demo set.
+- `npm run seed:users` adds the full seeded admin-visible dataset: 20 students and 10 companies.
+
+Students and companies created through normal registration must be approved by the admin. Seeded users created by `npm run seed:users` are already approved, so they appear in `Manage Students`, `Manage Companies`, and dashboard totals, but not in `Pending Approvals`.
 
 ---
 
@@ -184,6 +191,7 @@ npm run build
 npm run preview
 npm run start
 npm run db:check
+npm run seed:users
 npm run seed:coding
 npm run seed:demo
 ```
@@ -222,6 +230,7 @@ Do not set `VITE_API_URL` for the Vercel deployment. The web app uses relative `
 Before validating login or dashboard data, run the schema against Supabase using the SQL Editor, then optionally verify from this machine:
 
 ```bash
+npm run seed:users
 npm run db:check
 ```
 

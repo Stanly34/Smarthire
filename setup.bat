@@ -24,6 +24,7 @@ echo 3. Run the schema:
 echo    psql -U postgres -d smarthire -f db/schema.sql
 echo.
 echo 4. Seed the coding practice catalog:
+echo    npm run seed:users
 echo    npm run seed:coding
 echo.
 echo 5. Start the full app:

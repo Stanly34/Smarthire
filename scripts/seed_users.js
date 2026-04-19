@@ -6,6 +6,71 @@ const {
   DEMO_STUDENTS,
 } = require('./lib/demoCredentialsData');
 
+const LEGACY_SKILL_ID_TO_NAME = {
+  1: 'JavaScript',
+  2: 'Python',
+  3: 'Java',
+  4: 'C++',
+  5: 'C',
+  6: 'React',
+  7: 'Node.js',
+  8: 'SQL',
+  9: 'Machine Learning',
+  10: 'Data Structures',
+  19: 'Express',
+  21: 'PostgreSQL',
+  22: 'MongoDB',
+  24: 'Data Science',
+  27: 'Spring Boot',
+  28: 'Angular',
+  29: 'Vue.js',
+  30: 'TypeScript',
+  31: 'Docker',
+  32: 'Kubernetes',
+  33: 'AWS',
+  34: 'Git',
+  35: 'Linux',
+  36: 'HTML',
+  37: 'CSS',
+  38: 'TailwindCSS',
+  39: 'REST API',
+  40: 'GraphQL',
+  42: 'Algorithms',
+  43: 'System Design',
+};
+
+function resolveSkillNames(skills) {
+  return skills.map((skill) => {
+    if (typeof skill === 'string') return skill;
+
+    const resolved = LEGACY_SKILL_ID_TO_NAME[skill];
+    if (!resolved) {
+      throw new Error(`Unknown demo skill reference: ${skill}`);
+    }
+
+    return resolved;
+  });
+}
+
+async function ensureSkillIds(client, skills) {
+  const skillIds = [];
+
+  for (const skillName of resolveSkillNames(skills)) {
+    let skillRow = await client.query('SELECT id FROM skills WHERE name = $1', [skillName]);
+
+    if (skillRow.rows.length === 0) {
+      skillRow = await client.query(
+        'INSERT INTO skills (name) VALUES ($1) RETURNING id',
+        [skillName]
+      );
+    }
+
+    skillIds.push(skillRow.rows[0].id);
+  }
+
+  return skillIds;
+}
+
 async function upsertUser(client, { email, password, role, isApproved = true }) {
   const passwordHash = await bcrypt.hash(password, 10);
 
@@ -96,7 +161,9 @@ async function upsertStudentProfile(client, userId, student) {
   }
 
   await client.query('DELETE FROM student_skills WHERE student_id = $1', [studentId]);
-  for (const skillId of student.skills) {
+  const skillIds = await ensureSkillIds(client, student.skills);
+
+  for (const skillId of skillIds) {
     await client.query(
       'INSERT INTO student_skills (student_id, skill_id) VALUES ($1, $2) ON CONFLICT DO NOTHING',
       [studentId, skillId]

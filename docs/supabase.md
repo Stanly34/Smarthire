@@ -23,7 +23,7 @@ Open **SQL Editor** in Supabase and run the full contents of:
 db/schema.sql
 ```
 
-This creates the SmartHire tables and seeds the default admin, skills, and sample coding problems.
+This creates the SmartHire tables and seeds the default admin and shared lookup data. The full seeded student/company demo dataset is added separately with `npm run seed:users`.
 
 ## 3. Configure Vercel
 
@@ -49,6 +49,7 @@ Do not set `VITE_API_URL` on Vercel. The web app should call the API through sam
 If you want to test from this machine, place the Supabase values in root `.env`, then run:
 
 ```bash
+npm run seed:users
 npm run db:check
 ```
 
@@ -60,9 +61,19 @@ Connected using SSL: no
 Tables found: 11/11
 PASS default admin: 1 row(s)
 PASS skills: 34 row(s)
-PASS coding problems: 5 row(s)
+PASS seeded students: 20/20 seeded student account(s)
+PASS seeded companies: 10/10 seeded company account(s)
+PASS coding problems: 100 row(s)
 ```
 
 For the currently validated Supabase pooler, the expected SSL line is `Connected using SSL: no` because `DATABASE_SSL=false` is required for this pooler endpoint.
+
+## 5. Admin Panel Behavior
+
+After `npm run seed:users`:
+
+- seeded demo students and companies are already approved
+- they appear in `Manage Students`, `Manage Companies`, and `/api/admin/stats`
+- they do not appear in `Pending Approvals`, because that section only shows `is_approved = false` users
 
 Never commit `.env`, Supabase credentials, Vercel tokens, or `.vercel/`.
