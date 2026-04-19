@@ -333,14 +333,15 @@ export default function CodingPractice() {
                   </div>
                 )}
 
-                <div className="bg-gray-50 border rounded-lg p-3 mb-3">
-                  <p className="text-sm text-gray-700 whitespace-pre-line mb-2">{currentState.current_problem.description}</p>
-                  <div className="text-xs text-gray-500 whitespace-pre-line">
-                    <span className="font-semibold">Sample Input:</span>{'\n'}
-                    {currentState.current_problem.sample_input}
-                    {'\n'}
-                    <span className="font-semibold">Sample Output:</span>{'\n'}
-                    {currentState.current_problem.sample_output}
+                <div className="mb-3">
+                  <p className="text-sm text-gray-300 whitespace-pre-line">{currentState.current_problem.description}</p>
+                  <div className="mt-2 space-y-1 text-xs text-gray-400">
+                    <div>
+                      <span className="font-semibold text-gray-300">Sample Input:</span> {currentState.current_problem.sample_input}
+                    </div>
+                    <div>
+                      <span className="font-semibold text-gray-300">Sample Output:</span> {currentState.current_problem.sample_output}
+                    </div>
                   </div>
                 </div>
 
