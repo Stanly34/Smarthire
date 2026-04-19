@@ -348,7 +348,9 @@ export default function CodingPractice() {
                 {feedback && (
                   <div className={`mt-3 p-3 rounded-lg text-sm ${feedback.passed ? 'bg-green-50 border border-green-200 text-green-800' : 'bg-red-50 border border-red-200 text-red-800'}`}>
                     <div className="font-semibold">{feedback.message}</div>
-                    {feedback.score !== undefined && <div className="mt-1">Score: {feedback.score}/100</div>}
+                    {feedback.progress_score !== undefined && feedback.progress_total !== undefined && (
+                      <div className="mt-1">{`Score: ${feedback.progress_score}/${feedback.progress_total}`}</div>
+                    )}
                     {feedback.feedback && <div className="mt-1 text-xs">{feedback.feedback}</div>}
                   </div>
                 )}

@@ -227,18 +227,22 @@ const submitCode = async (req, res) => {
 
       const updatedState = await getCurrentLanguageState(db, studentId, problem.language);
       const unlockedNextTask = execution.passed ? formatProblem(updatedState?.currentProblem) : null;
+      const progressCompletedCount = updatedState?.progress.completed_count ?? currentState.progress.completed_count;
+      const progressTotalTasks = updatedState?.progress.total_tasks ?? currentState.progress.total_tasks;
 
       res.json({
         result: resultInsert.rows[0],
         score: execution.score,
+        progress_score: progressCompletedCount,
+        progress_total: progressTotalTasks,
         passed: execution.passed,
         message: execution.passed
           ? unlockedNextTask
-            ? 'All tests passed. The next task is now unlocked.'
-            : 'All tests passed. You completed every task for this language.'
+            ? 'Tests passed. The next task is now unlocked.'
+            : 'Tests passed. You completed every task for this language.'
           : 'Some tests failed. Stay on the current task and try again.',
-        feedback: execution.feedback,
-        completed_count: updatedState?.progress.completed_count ?? currentState.progress.completed_count,
+        feedback: execution.passed ? null : execution.feedback,
+        completed_count: progressCompletedCount,
         current_task_number: updatedState?.progress.current_task_number ?? currentState.progress.current_task_number,
         unlocked_next_task: unlockedNextTask,
       });
