@@ -11,8 +11,10 @@
     "start": "node server.js",
     "db:check": "node scripts/check_db.js",
     "seed:coding": "node scripts/seed_coding_practice.js",
+    "seed:users": "node scripts/seed_users.js",
     "seed:credentials": "node scripts/seed_demo_credentials.js",
-    "seed:demo": "node scripts/seed_demo.js"
+    "seed:demo": "node scripts/seed_demo.js",
+    "generate:users-md": "node scripts/generate_users_md.js"
   },
   "dependencies": {
     "axios": "^1.7.2",

@@ -2639,6 +2639,7 @@ function buildMarkdown() {
   lines.push('');
   lines.push('- Each answer below is language-matched to its section.');
   lines.push('- Languages are listed in the same order as the app sidebar.');
+  lines.push('- Every task is shown in a simple Q / A format.');
   lines.push('');
 
   for (const level of LEVEL_ORDER) {
@@ -2662,10 +2663,9 @@ function buildMarkdown() {
 
         lines.push(`#### Task ${problem.task_number}: ${problem.title}`);
         lines.push('');
-        lines.push('| Row | Content |');
-        lines.push('| --- | --- |');
-        lines.push(`| Q | ${problem.description.replace(/\|/g, '\\|')} |`);
-        lines.push(`| A | Reference answer in ${language} is shown below. |`);
+        lines.push(`Q: ${problem.description}`);
+        lines.push('');
+        lines.push(`A: Reference answer in ${language}`);
         lines.push('');
         lines.push(`\`\`\`${FENCE_BY_LANGUAGE[language]}`);
         lines.push(answer);

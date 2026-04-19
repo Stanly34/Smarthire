@@ -6,6 +6,7 @@ Important: students should type code in the website editor.
 
 - Each answer below is language-matched to its section.
 - Languages are listed in the same order as the app sidebar.
+- Every task is shown in a simple Q / A format.
 
 ## Beginner Level
 
@@ -13,10 +14,9 @@ Important: students should type code in the website editor.
 
 #### Task 1: Reverse a String
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in C to read a single line string from stdin and print the reversed string. |
-| A | Reference answer in C is shown below. |
+Q: Write code in C to read a single line string from stdin and print the reversed string.
+
+A: Reference answer in C
 
 ```c
 #include <stdio.h>
@@ -43,10 +43,9 @@ int main(void) {
 
 #### Task 2: FizzBuzz
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in C to read an integer N and print numbers from 1 to N. Print Fizz for multiples of 3, Buzz for multiples of 5, and FizzBuzz for multiples of both. |
-| A | Reference answer in C is shown below. |
+Q: Write code in C to read an integer N and print numbers from 1 to N. Print Fizz for multiples of 3, Buzz for multiples of 5, and FizzBuzz for multiples of both.
+
+A: Reference answer in C
 
 ```c
 #include <stdio.h>
@@ -78,10 +77,9 @@ int main(void) {
 
 #### Task 3: Array Sum
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in C to read an integer N, then N space-separated integers, and print their sum. |
-| A | Reference answer in C is shown below. |
+Q: Write code in C to read an integer N, then N space-separated integers, and print their sum.
+
+A: Reference answer in C
 
 ```c
 #include <stdio.h>
@@ -106,10 +104,9 @@ int main(void) {
 
 #### Task 4: Palindrome Checker
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in C to read a string and print true if it is a palindrome, otherwise print false. |
-| A | Reference answer in C is shown below. |
+Q: Write code in C to read a string and print true if it is a palindrome, otherwise print false.
+
+A: Reference answer in C
 
 ```c
 #include <stdio.h>
@@ -141,10 +138,9 @@ int main(void) {
 
 #### Task 5: Count Vowels
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in C to read a string and print the number of vowels in it. Treat uppercase and lowercase vowels the same. |
-| A | Reference answer in C is shown below. |
+Q: Write code in C to read a string and print the number of vowels in it. Treat uppercase and lowercase vowels the same.
+
+A: Reference answer in C
 
 ```c
 #include <ctype.h>
@@ -172,10 +168,9 @@ int main(void) {
 
 #### Task 6: Find Maximum Element
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in C to read an integer N, then N integers, and print the maximum value. |
-| A | Reference answer in C is shown below. |
+Q: Write code in C to read an integer N, then N integers, and print the maximum value.
+
+A: Reference answer in C
 
 ```c
 #include <stdio.h>
@@ -201,10 +196,9 @@ int main(void) {
 
 #### Task 7: Linear Search
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in C to read an integer N, then N integers, then a target value, and print the first index of the target. Print -1 if it does not exist. |
-| A | Reference answer in C is shown below. |
+Q: Write code in C to read an integer N, then N integers, then a target value, and print the first index of the target. Print -1 if it does not exist.
+
+A: Reference answer in C
 
 ```c
 #include <stdio.h>
@@ -236,10 +230,9 @@ int main(void) {
 
 #### Task 8: Factorial
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in C to read an integer N and print N factorial. |
-| A | Reference answer in C is shown below. |
+Q: Write code in C to read an integer N and print N factorial.
+
+A: Reference answer in C
 
 ```c
 #include <stdio.h>
@@ -263,10 +256,9 @@ int main(void) {
 
 #### Task 9: Prime Number Check
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in C to read an integer N and print true if it is prime, otherwise print false. |
-| A | Reference answer in C is shown below. |
+Q: Write code in C to read an integer N and print true if it is prime, otherwise print false.
+
+A: Reference answer in C
 
 ```c
 #include <stdio.h>
@@ -296,10 +288,9 @@ int main(void) {
 
 #### Task 10: Remove Duplicates
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in C to read an integer N, then N integers, and print the values without duplicates while keeping their first appearance order. |
-| A | Reference answer in C is shown below. |
+Q: Write code in C to read an integer N, then N integers, and print the values without duplicates while keeping their first appearance order.
+
+A: Reference answer in C
 
 ```c
 #include <stdio.h>
@@ -342,10 +333,9 @@ int main(void) {
 
 #### Task 1: Reverse a String
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in C++ to read a single line string from stdin and print the reversed string. |
-| A | Reference answer in C++ is shown below. |
+Q: Write code in C++ to read a single line string from stdin and print the reversed string.
+
+A: Reference answer in C++
 
 ```cpp
 #include <algorithm>
@@ -364,10 +354,9 @@ int main() {
 
 #### Task 2: FizzBuzz
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in C++ to read an integer N and print numbers from 1 to N. Print Fizz for multiples of 3, Buzz for multiples of 5, and FizzBuzz for multiples of both. |
-| A | Reference answer in C++ is shown below. |
+Q: Write code in C++ to read an integer N and print numbers from 1 to N. Print Fizz for multiples of 3, Buzz for multiples of 5, and FizzBuzz for multiples of both.
+
+A: Reference answer in C++
 
 ```cpp
 #include <iostream>
@@ -400,10 +389,9 @@ int main() {
 
 #### Task 3: Array Sum
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in C++ to read an integer N, then N space-separated integers, and print their sum. |
-| A | Reference answer in C++ is shown below. |
+Q: Write code in C++ to read an integer N, then N space-separated integers, and print their sum.
+
+A: Reference answer in C++
 
 ```cpp
 #include <iostream>
@@ -426,10 +414,9 @@ int main() {
 
 #### Task 4: Palindrome Checker
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in C++ to read a string and print true if it is a palindrome, otherwise print false. |
-| A | Reference answer in C++ is shown below. |
+Q: Write code in C++ to read a string and print true if it is a palindrome, otherwise print false.
+
+A: Reference answer in C++
 
 ```cpp
 #include <algorithm>
@@ -449,10 +436,9 @@ int main() {
 
 #### Task 5: Count Vowels
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in C++ to read a string and print the number of vowels in it. Treat uppercase and lowercase vowels the same. |
-| A | Reference answer in C++ is shown below. |
+Q: Write code in C++ to read a string and print the number of vowels in it. Treat uppercase and lowercase vowels the same.
+
+A: Reference answer in C++
 
 ```cpp
 #include <cctype>
@@ -477,10 +463,9 @@ int main() {
 
 #### Task 6: Find Maximum Element
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in C++ to read an integer N, then N integers, and print the maximum value. |
-| A | Reference answer in C++ is shown below. |
+Q: Write code in C++ to read an integer N, then N integers, and print the maximum value.
+
+A: Reference answer in C++
 
 ```cpp
 #include <iostream>
@@ -505,10 +490,9 @@ int main() {
 
 #### Task 7: Linear Search
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in C++ to read an integer N, then N integers, then a target value, and print the first index of the target. Print -1 if it does not exist. |
-| A | Reference answer in C++ is shown below. |
+Q: Write code in C++ to read an integer N, then N integers, then a target value, and print the first index of the target. Print -1 if it does not exist.
+
+A: Reference answer in C++
 
 ```cpp
 #include <iostream>
@@ -538,10 +522,9 @@ int main() {
 
 #### Task 8: Factorial
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in C++ to read an integer N and print N factorial. |
-| A | Reference answer in C++ is shown below. |
+Q: Write code in C++ to read an integer N and print N factorial.
+
+A: Reference answer in C++
 
 ```cpp
 #include <iostream>
@@ -561,10 +544,9 @@ int main() {
 
 #### Task 9: Prime Number Check
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in C++ to read an integer N and print true if it is prime, otherwise print false. |
-| A | Reference answer in C++ is shown below. |
+Q: Write code in C++ to read an integer N and print true if it is prime, otherwise print false.
+
+A: Reference answer in C++
 
 ```cpp
 #include <iostream>
@@ -590,10 +572,9 @@ int main() {
 
 #### Task 10: Remove Duplicates
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in C++ to read an integer N, then N integers, and print the values without duplicates while keeping their first appearance order. |
-| A | Reference answer in C++ is shown below. |
+Q: Write code in C++ to read an integer N, then N integers, and print the values without duplicates while keeping their first appearance order.
+
+A: Reference answer in C++
 
 ```cpp
 #include <iostream>
@@ -629,10 +610,9 @@ int main() {
 
 #### Task 1: Reverse a String
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in JavaScript to read a single line string from stdin and print the reversed string. |
-| A | Reference answer in JavaScript is shown below. |
+Q: Write code in JavaScript to read a single line string from stdin and print the reversed string.
+
+A: Reference answer in JavaScript
 
 ```javascript
 const fs = require('fs');
@@ -642,10 +622,9 @@ console.log(Array.from(text).reverse().join(''));
 
 #### Task 2: FizzBuzz
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in JavaScript to read an integer N and print numbers from 1 to N. Print Fizz for multiples of 3, Buzz for multiples of 5, and FizzBuzz for multiples of both. |
-| A | Reference answer in JavaScript is shown below. |
+Q: Write code in JavaScript to read an integer N and print numbers from 1 to N. Print Fizz for multiples of 3, Buzz for multiples of 5, and FizzBuzz for multiples of both.
+
+A: Reference answer in JavaScript
 
 ```javascript
 const fs = require('fs');
@@ -669,10 +648,9 @@ console.log(answer.join(' '));
 
 #### Task 3: Array Sum
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in JavaScript to read an integer N, then N space-separated integers, and print their sum. |
-| A | Reference answer in JavaScript is shown below. |
+Q: Write code in JavaScript to read an integer N, then N space-separated integers, and print their sum.
+
+A: Reference answer in JavaScript
 
 ```javascript
 const fs = require('fs');
@@ -689,10 +667,9 @@ console.log(sum);
 
 #### Task 4: Palindrome Checker
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in JavaScript to read a string and print true if it is a palindrome, otherwise print false. |
-| A | Reference answer in JavaScript is shown below. |
+Q: Write code in JavaScript to read a string and print true if it is a palindrome, otherwise print false.
+
+A: Reference answer in JavaScript
 
 ```javascript
 const fs = require('fs');
@@ -703,10 +680,9 @@ console.log(text === reversed ? 'true' : 'false');
 
 #### Task 5: Count Vowels
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in JavaScript to read a string and print the number of vowels in it. Treat uppercase and lowercase vowels the same. |
-| A | Reference answer in JavaScript is shown below. |
+Q: Write code in JavaScript to read a string and print the number of vowels in it. Treat uppercase and lowercase vowels the same.
+
+A: Reference answer in JavaScript
 
 ```javascript
 const fs = require('fs');
@@ -724,10 +700,9 @@ console.log(count);
 
 #### Task 6: Find Maximum Element
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in JavaScript to read an integer N, then N integers, and print the maximum value. |
-| A | Reference answer in JavaScript is shown below. |
+Q: Write code in JavaScript to read an integer N, then N integers, and print the maximum value.
+
+A: Reference answer in JavaScript
 
 ```javascript
 const fs = require('fs');
@@ -746,10 +721,9 @@ console.log(best);
 
 #### Task 7: Linear Search
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in JavaScript to read an integer N, then N integers, then a target value, and print the first index of the target. Print -1 if it does not exist. |
-| A | Reference answer in JavaScript is shown below. |
+Q: Write code in JavaScript to read an integer N, then N integers, then a target value, and print the first index of the target. Print -1 if it does not exist.
+
+A: Reference answer in JavaScript
 
 ```javascript
 const fs = require('fs');
@@ -771,10 +745,9 @@ console.log(answer);
 
 #### Task 8: Factorial
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in JavaScript to read an integer N and print N factorial. |
-| A | Reference answer in JavaScript is shown below. |
+Q: Write code in JavaScript to read an integer N and print N factorial.
+
+A: Reference answer in JavaScript
 
 ```javascript
 const fs = require('fs');
@@ -790,10 +763,9 @@ console.log(answer);
 
 #### Task 9: Prime Number Check
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in JavaScript to read an integer N and print true if it is prime, otherwise print false. |
-| A | Reference answer in JavaScript is shown below. |
+Q: Write code in JavaScript to read an integer N and print true if it is prime, otherwise print false.
+
+A: Reference answer in JavaScript
 
 ```javascript
 const fs = require('fs');
@@ -815,10 +787,9 @@ if (n < 2) {
 
 #### Task 10: Remove Duplicates
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in JavaScript to read an integer N, then N integers, and print the values without duplicates while keeping their first appearance order. |
-| A | Reference answer in JavaScript is shown below. |
+Q: Write code in JavaScript to read an integer N, then N integers, and print the values without duplicates while keeping their first appearance order.
+
+A: Reference answer in JavaScript
 
 ```javascript
 const fs = require('fs');
@@ -842,10 +813,9 @@ console.log(answer.join(' '));
 
 #### Task 1: Reverse a String
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Python to read a single line string from stdin and print the reversed string. |
-| A | Reference answer in Python is shown below. |
+Q: Write code in Python to read a single line string from stdin and print the reversed string.
+
+A: Reference answer in Python
 
 ```python
 import sys
@@ -856,10 +826,9 @@ print(text[::-1])
 
 #### Task 2: FizzBuzz
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Python to read an integer N and print numbers from 1 to N. Print Fizz for multiples of 3, Buzz for multiples of 5, and FizzBuzz for multiples of both. |
-| A | Reference answer in Python is shown below. |
+Q: Write code in Python to read an integer N and print numbers from 1 to N. Print Fizz for multiples of 3, Buzz for multiples of 5, and FizzBuzz for multiples of both.
+
+A: Reference answer in Python
 
 ```python
 import sys
@@ -880,10 +849,9 @@ print(' '.join(answer))
 
 #### Task 3: Array Sum
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Python to read an integer N, then N space-separated integers, and print their sum. |
-| A | Reference answer in Python is shown below. |
+Q: Write code in Python to read an integer N, then N space-separated integers, and print their sum.
+
+A: Reference answer in Python
 
 ```python
 import sys
@@ -896,10 +864,9 @@ print(sum(values))
 
 #### Task 4: Palindrome Checker
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Python to read a string and print true if it is a palindrome, otherwise print false. |
-| A | Reference answer in Python is shown below. |
+Q: Write code in Python to read a string and print true if it is a palindrome, otherwise print false.
+
+A: Reference answer in Python
 
 ```python
 import sys
@@ -910,10 +877,9 @@ print('true' if text == text[::-1] else 'false')
 
 #### Task 5: Count Vowels
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Python to read a string and print the number of vowels in it. Treat uppercase and lowercase vowels the same. |
-| A | Reference answer in Python is shown below. |
+Q: Write code in Python to read a string and print the number of vowels in it. Treat uppercase and lowercase vowels the same.
+
+A: Reference answer in Python
 
 ```python
 import sys
@@ -925,10 +891,9 @@ print(count)
 
 #### Task 6: Find Maximum Element
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Python to read an integer N, then N integers, and print the maximum value. |
-| A | Reference answer in Python is shown below. |
+Q: Write code in Python to read an integer N, then N integers, and print the maximum value.
+
+A: Reference answer in Python
 
 ```python
 import sys
@@ -941,10 +906,9 @@ print(max(values))
 
 #### Task 7: Linear Search
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Python to read an integer N, then N integers, then a target value, and print the first index of the target. Print -1 if it does not exist. |
-| A | Reference answer in Python is shown below. |
+Q: Write code in Python to read an integer N, then N integers, then a target value, and print the first index of the target. Print -1 if it does not exist.
+
+A: Reference answer in Python
 
 ```python
 import sys
@@ -965,10 +929,9 @@ print(answer)
 
 #### Task 8: Factorial
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Python to read an integer N and print N factorial. |
-| A | Reference answer in Python is shown below. |
+Q: Write code in Python to read an integer N and print N factorial.
+
+A: Reference answer in Python
 
 ```python
 import sys
@@ -982,10 +945,9 @@ print(answer)
 
 #### Task 9: Prime Number Check
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Python to read an integer N and print true if it is prime, otherwise print false. |
-| A | Reference answer in Python is shown below. |
+Q: Write code in Python to read an integer N and print true if it is prime, otherwise print false.
+
+A: Reference answer in Python
 
 ```python
 import sys
@@ -1006,10 +968,9 @@ else:
 
 #### Task 10: Remove Duplicates
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Python to read an integer N, then N integers, and print the values without duplicates while keeping their first appearance order. |
-| A | Reference answer in Python is shown below. |
+Q: Write code in Python to read an integer N, then N integers, and print the values without duplicates while keeping their first appearance order.
+
+A: Reference answer in Python
 
 ```python
 import sys
@@ -1034,10 +995,9 @@ print(' '.join(answer))
 
 #### Task 1: Binary Search
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Java to read a sorted array and a target value, then print the index of the target using binary search. Print -1 if it is absent. |
-| A | Reference answer in Java is shown below. |
+Q: Write code in Java to read a sorted array and a target value, then print the index of the target using binary search. Print -1 if it is absent.
+
+A: Reference answer in Java
 
 ```java
 import java.util.*;
@@ -1075,10 +1035,9 @@ public class Main {
 
 #### Task 2: Linked List Reversal
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Java to read an integer N followed by N node values and print the linked list in reverse order as space-separated values. |
-| A | Reference answer in Java is shown below. |
+Q: Write code in Java to read an integer N followed by N node values and print the linked list in reverse order as space-separated values.
+
+A: Reference answer in Java
 
 ```java
 import java.util.*;
@@ -1106,10 +1065,9 @@ public class Main {
 
 #### Task 3: Valid Parentheses
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Java to read a bracket string and print true if it is balanced, otherwise print false. |
-| A | Reference answer in Java is shown below. |
+Q: Write code in Java to read a bracket string and print true if it is balanced, otherwise print false.
+
+A: Reference answer in Java
 
 ```java
 import java.util.*;
@@ -1147,10 +1105,9 @@ public class Main {
 
 #### Task 4: Merge Two Sorted Arrays
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Java to read two sorted arrays and print one merged sorted array. |
-| A | Reference answer in Java is shown below. |
+Q: Write code in Java to read two sorted arrays and print one merged sorted array.
+
+A: Reference answer in Java
 
 ```java
 import java.util.*;
@@ -1200,10 +1157,9 @@ public class Main {
 
 #### Task 5: Two Sum
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Java to read an array and a target sum, then print the indices of the first pair that adds up to the target. Print -1 if no pair exists. |
-| A | Reference answer in Java is shown below. |
+Q: Write code in Java to read an array and a target sum, then print the indices of the first pair that adds up to the target. Print -1 if no pair exists.
+
+A: Reference answer in Java
 
 ```java
 import java.util.*;
@@ -1236,10 +1192,9 @@ public class Main {
 
 #### Task 6: Frequency Counter
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Java to read an integer N followed by N integers and print value:count pairs sorted by the numeric value. |
-| A | Reference answer in Java is shown below. |
+Q: Write code in Java to read an integer N followed by N integers and print value:count pairs sorted by the numeric value.
+
+A: Reference answer in Java
 
 ```java
 import java.util.*;
@@ -1268,10 +1223,9 @@ public class Main {
 
 #### Task 7: Rotate Array
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Java to read an array and an integer K, then rotate the array to the right by K steps and print the result. |
-| A | Reference answer in Java is shown below. |
+Q: Write code in Java to read an array and an integer K, then rotate the array to the right by K steps and print the result.
+
+A: Reference answer in Java
 
 ```java
 import java.util.*;
@@ -1300,10 +1254,9 @@ public class Main {
 
 #### Task 8: Queue Using Stacks
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Java to process queue commands using stack-based logic. Input starts with Q, then Q lines of PUSH x, POP, or PEEK. Print outputs for POP and PEEK in order, using EMPTY when needed. |
-| A | Reference answer in Java is shown below. |
+Q: Write code in Java to process queue commands using stack-based logic. Input starts with Q, then Q lines of PUSH x, POP, or PEEK. Print outputs for POP and PEEK in order, using EMPTY when needed.
+
+A: Reference answer in Java
 
 ```java
 import java.util.*;
@@ -1341,10 +1294,9 @@ public class Main {
 
 #### Task 9: Longest Common Prefix
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Java to read N strings and print their longest common prefix. Print - if there is no common prefix. |
-| A | Reference answer in Java is shown below. |
+Q: Write code in Java to read N strings and print their longest common prefix. Print - if there is no common prefix.
+
+A: Reference answer in Java
 
 ```java
 import java.util.*;
@@ -1369,10 +1321,9 @@ public class Main {
 
 #### Task 10: Group Anagrams
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Java to read N words, group anagrams together, sort each group alphabetically, sort groups by their first word, and print groups joined by " \| ". |
-| A | Reference answer in Java is shown below. |
+Q: Write code in Java to read N words, group anagrams together, sort each group alphabetically, sort groups by their first word, and print groups joined by " | ".
+
+A: Reference answer in Java
 
 ```java
 import java.util.*;
@@ -1410,10 +1361,9 @@ public class Main {
 
 #### Task 1: Binary Search
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in PHP to read a sorted array and a target value, then print the index of the target using binary search. Print -1 if it is absent. |
-| A | Reference answer in PHP is shown below. |
+Q: Write code in PHP to read a sorted array and a target value, then print the index of the target using binary search. Print -1 if it is absent.
+
+A: Reference answer in PHP
 
 ```php
 <?php
@@ -1447,10 +1397,9 @@ echo $answer . PHP_EOL;
 
 #### Task 2: Linked List Reversal
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in PHP to read an integer N followed by N node values and print the linked list in reverse order as space-separated values. |
-| A | Reference answer in PHP is shown below. |
+Q: Write code in PHP to read an integer N followed by N node values and print the linked list in reverse order as space-separated values.
+
+A: Reference answer in PHP
 
 ```php
 <?php
@@ -1467,10 +1416,9 @@ echo implode(' ', $values) . PHP_EOL;
 
 #### Task 3: Valid Parentheses
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in PHP to read a bracket string and print true if it is balanced, otherwise print false. |
-| A | Reference answer in PHP is shown below. |
+Q: Write code in PHP to read a bracket string and print true if it is balanced, otherwise print false.
+
+A: Reference answer in PHP
 
 ```php
 <?php
@@ -1500,10 +1448,9 @@ echo ($valid ? 'true' : 'false') . PHP_EOL;
 
 #### Task 4: Merge Two Sorted Arrays
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in PHP to read two sorted arrays and print one merged sorted array. |
-| A | Reference answer in PHP is shown below. |
+Q: Write code in PHP to read two sorted arrays and print one merged sorted array.
+
+A: Reference answer in PHP
 
 ```php
 <?php
@@ -1543,10 +1490,9 @@ echo implode(' ', $merged) . PHP_EOL;
 
 #### Task 5: Two Sum
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in PHP to read an array and a target sum, then print the indices of the first pair that adds up to the target. Print -1 if no pair exists. |
-| A | Reference answer in PHP is shown below. |
+Q: Write code in PHP to read an array and a target sum, then print the indices of the first pair that adds up to the target. Print -1 if no pair exists.
+
+A: Reference answer in PHP
 
 ```php
 <?php
@@ -1577,10 +1523,9 @@ echo $answer . PHP_EOL;
 
 #### Task 6: Frequency Counter
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in PHP to read an integer N followed by N integers and print value:count pairs sorted by the numeric value. |
-| A | Reference answer in PHP is shown below. |
+Q: Write code in PHP to read an integer N followed by N integers and print value:count pairs sorted by the numeric value.
+
+A: Reference answer in PHP
 
 ```php
 <?php
@@ -1607,10 +1552,9 @@ echo implode(' ', $parts) . PHP_EOL;
 
 #### Task 7: Rotate Array
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in PHP to read an array and an integer K, then rotate the array to the right by K steps and print the result. |
-| A | Reference answer in PHP is shown below. |
+Q: Write code in PHP to read an array and an integer K, then rotate the array to the right by K steps and print the result.
+
+A: Reference answer in PHP
 
 ```php
 <?php
@@ -1631,10 +1575,9 @@ echo implode(' ', $rotated) . PHP_EOL;
 
 #### Task 8: Queue Using Stacks
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in PHP to process queue commands using stack-based logic. Input starts with Q, then Q lines of PUSH x, POP, or PEEK. Print outputs for POP and PEEK in order, using EMPTY when needed. |
-| A | Reference answer in PHP is shown below. |
+Q: Write code in PHP to process queue commands using stack-based logic. Input starts with Q, then Q lines of PUSH x, POP, or PEEK. Print outputs for POP and PEEK in order, using EMPTY when needed.
+
+A: Reference answer in PHP
 
 ```php
 <?php
@@ -1668,10 +1611,9 @@ echo implode(' ', $outputs) . PHP_EOL;
 
 #### Task 9: Longest Common Prefix
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in PHP to read N strings and print their longest common prefix. Print - if there is no common prefix. |
-| A | Reference answer in PHP is shown below. |
+Q: Write code in PHP to read N strings and print their longest common prefix. Print - if there is no common prefix.
+
+A: Reference answer in PHP
 
 ```php
 <?php
@@ -1691,10 +1633,9 @@ echo ($prefix === '' ? '-' : $prefix) . PHP_EOL;
 
 #### Task 10: Group Anagrams
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in PHP to read N words, group anagrams together, sort each group alphabetically, sort groups by their first word, and print groups joined by " \| ". |
-| A | Reference answer in PHP is shown below. |
+Q: Write code in PHP to read N words, group anagrams together, sort each group alphabetically, sort groups by their first word, and print groups joined by " | ".
+
+A: Reference answer in PHP
 
 ```php
 <?php
@@ -1735,10 +1676,9 @@ echo implode(' | ', $parts) . PHP_EOL;
 
 #### Task 1: Binary Search
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in C# to read a sorted array and a target value, then print the index of the target using binary search. Print -1 if it is absent. |
-| A | Reference answer in C# is shown below. |
+Q: Write code in C# to read a sorted array and a target value, then print the index of the target using binary search. Print -1 if it is absent.
+
+A: Reference answer in C#
 
 ```csharp
 using System;
@@ -1782,10 +1722,9 @@ public class Program
 
 #### Task 2: Linked List Reversal
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in C# to read an integer N followed by N node values and print the linked list in reverse order as space-separated values. |
-| A | Reference answer in C# is shown below. |
+Q: Write code in C# to read an integer N followed by N node values and print the linked list in reverse order as space-separated values.
+
+A: Reference answer in C#
 
 ```csharp
 using System;
@@ -1816,10 +1755,9 @@ public class Program
 
 #### Task 3: Valid Parentheses
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in C# to read a bracket string and print true if it is balanced, otherwise print false. |
-| A | Reference answer in C# is shown below. |
+Q: Write code in C# to read a bracket string and print true if it is balanced, otherwise print false.
+
+A: Reference answer in C#
 
 ```csharp
 using System;
@@ -1864,10 +1802,9 @@ public class Program
 
 #### Task 4: Merge Two Sorted Arrays
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in C# to read two sorted arrays and print one merged sorted array. |
-| A | Reference answer in C# is shown below. |
+Q: Write code in C# to read two sorted arrays and print one merged sorted array.
+
+A: Reference answer in C#
 
 ```csharp
 using System;
@@ -1908,10 +1845,9 @@ public class Program
 
 #### Task 5: Two Sum
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in C# to read an array and a target sum, then print the indices of the first pair that adds up to the target. Print -1 if no pair exists. |
-| A | Reference answer in C# is shown below. |
+Q: Write code in C# to read an array and a target sum, then print the indices of the first pair that adds up to the target. Print -1 if no pair exists.
+
+A: Reference answer in C#
 
 ```csharp
 using System;
@@ -1956,10 +1892,9 @@ public class Program
 
 #### Task 6: Frequency Counter
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in C# to read an integer N followed by N integers and print value:count pairs sorted by the numeric value. |
-| A | Reference answer in C# is shown below. |
+Q: Write code in C# to read an integer N followed by N integers and print value:count pairs sorted by the numeric value.
+
+A: Reference answer in C#
 
 ```csharp
 using System;
@@ -1991,10 +1926,9 @@ public class Program
 
 #### Task 7: Rotate Array
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in C# to read an array and an integer K, then rotate the array to the right by K steps and print the result. |
-| A | Reference answer in C# is shown below. |
+Q: Write code in C# to read an array and an integer K, then rotate the array to the right by K steps and print the result.
+
+A: Reference answer in C#
 
 ```csharp
 using System;
@@ -2028,10 +1962,9 @@ public class Program
 
 #### Task 8: Queue Using Stacks
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in C# to process queue commands using stack-based logic. Input starts with Q, then Q lines of PUSH x, POP, or PEEK. Print outputs for POP and PEEK in order, using EMPTY when needed. |
-| A | Reference answer in C# is shown below. |
+Q: Write code in C# to process queue commands using stack-based logic. Input starts with Q, then Q lines of PUSH x, POP, or PEEK. Print outputs for POP and PEEK in order, using EMPTY when needed.
+
+A: Reference answer in C#
 
 ```csharp
 using System;
@@ -2089,10 +2022,9 @@ public class Program
 
 #### Task 9: Longest Common Prefix
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in C# to read N strings and print their longest common prefix. Print - if there is no common prefix. |
-| A | Reference answer in C# is shown below. |
+Q: Write code in C# to read N strings and print their longest common prefix. Print - if there is no common prefix.
+
+A: Reference answer in C#
 
 ```csharp
 using System;
@@ -2122,10 +2054,9 @@ public class Program
 
 #### Task 10: Group Anagrams
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in C# to read N words, group anagrams together, sort each group alphabetically, sort groups by their first word, and print groups joined by " \| ". |
-| A | Reference answer in C# is shown below. |
+Q: Write code in C# to read N words, group anagrams together, sort each group alphabetically, sort groups by their first word, and print groups joined by " | ".
+
+A: Reference answer in C#
 
 ```csharp
 using System;
@@ -2172,10 +2103,9 @@ public class Program
 
 #### Task 1: Merge Intervals
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Go to read N intervals and print the merged non-overlapping intervals in the format "start end \| start end". |
-| A | Reference answer in Go is shown below. |
+Q: Write code in Go to read N intervals and print the merged non-overlapping intervals in the format "start end | start end".
+
+A: Reference answer in Go
 
 ```go
 package main
@@ -2232,10 +2162,9 @@ func main() {
 
 #### Task 2: Longest Common Subsequence
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Go to read two strings and print the length of their longest common subsequence. |
-| A | Reference answer in Go is shown below. |
+Q: Write code in Go to read two strings and print the length of their longest common subsequence.
+
+A: Reference answer in Go
 
 ```go
 package main
@@ -2279,10 +2208,9 @@ func main() {
 
 #### Task 3: Top K Frequent Elements
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Go to read an array and an integer K, then print the K most frequent values ordered by frequency descending and value ascending. |
-| A | Reference answer in Go is shown below. |
+Q: Write code in Go to read an array and an integer K, then print the K most frequent values ordered by frequency descending and value ascending.
+
+A: Reference answer in Go
 
 ```go
 package main
@@ -2337,10 +2265,9 @@ func main() {
 
 #### Task 4: Course Schedule
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Go to read the number of courses and prerequisite pairs, then print true if all courses can be finished, otherwise print false. |
-| A | Reference answer in Go is shown below. |
+Q: Write code in Go to read the number of courses and prerequisite pairs, then print true if all courses can be finished, otherwise print false.
+
+A: Reference answer in Go
 
 ```go
 package main
@@ -2396,10 +2323,9 @@ func main() {
 
 #### Task 5: Dijkstra Shortest Path
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Go to read a weighted directed graph and print the shortest distance from source to target. Print -1 when the target is unreachable. |
-| A | Reference answer in Go is shown below. |
+Q: Write code in Go to read a weighted directed graph and print the shortest distance from source to target. Print -1 when the target is unreachable.
+
+A: Reference answer in Go
 
 ```go
 package main
@@ -2485,10 +2411,9 @@ func main() {
 
 #### Task 6: Sliding Window Maximum
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Go to read an array and a window size K, then print the maximum value in each sliding window. |
-| A | Reference answer in Go is shown below. |
+Q: Write code in Go to read an array and a window size K, then print the maximum value in each sliding window.
+
+A: Reference answer in Go
 
 ```go
 package main
@@ -2538,10 +2463,9 @@ func main() {
 
 #### Task 7: LRU Cache
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Go to simulate an LRU cache. Input starts with capacity and Q, followed by PUT key value or GET key commands. Print results for GET commands in order, using -1 for missing keys. |
-| A | Reference answer in Go is shown below. |
+Q: Write code in Go to simulate an LRU cache. Input starts with capacity and Q, followed by PUT key value or GET key commands. Print results for GET commands in order, using -1 for missing keys.
+
+A: Reference answer in Go
 
 ```go
 package main
@@ -2616,10 +2540,9 @@ func main() {
 
 #### Task 8: Trie Prefix Search
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Go to build a trie from given words and print how many words match each query prefix. |
-| A | Reference answer in Go is shown below. |
+Q: Write code in Go to build a trie from given words and print how many words match each query prefix.
+
+A: Reference answer in Go
 
 ```go
 package main
@@ -2665,10 +2588,9 @@ func main() {
 
 #### Task 9: Word Ladder
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Go to read a begin word, an end word, and a dictionary, then print the shortest transformation length. Print 0 when no transformation exists. |
-| A | Reference answer in Go is shown below. |
+Q: Write code in Go to read a begin word, an end word, and a dictionary, then print the shortest transformation length. Print 0 when no transformation exists.
+
+A: Reference answer in Go
 
 ```go
 package main
@@ -2739,10 +2661,9 @@ func main() {
 
 #### Task 10: Kth Largest Element
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Go to read an array and an integer K, then print the Kth largest element. |
-| A | Reference answer in Go is shown below. |
+Q: Write code in Go to read an array and an integer K, then print the Kth largest element.
+
+A: Reference answer in Go
 
 ```go
 package main
@@ -2775,10 +2696,9 @@ func main() {
 
 #### Task 1: Merge Intervals
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in TypeScript to read N intervals and print the merged non-overlapping intervals in the format "start end \| start end". |
-| A | Reference answer in TypeScript is shown below. |
+Q: Write code in TypeScript to read N intervals and print the merged non-overlapping intervals in the format "start end | start end".
+
+A: Reference answer in TypeScript
 
 ```typescript
 const fs = require('fs');
@@ -2807,10 +2727,9 @@ console.log(merged.map(item => item[0] + ' ' + item[1]).join(' | '));
 
 #### Task 2: Longest Common Subsequence
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in TypeScript to read two strings and print the length of their longest common subsequence. |
-| A | Reference answer in TypeScript is shown below. |
+Q: Write code in TypeScript to read two strings and print the length of their longest common subsequence.
+
+A: Reference answer in TypeScript
 
 ```typescript
 const fs = require('fs');
@@ -2834,10 +2753,9 @@ console.log(dp[first.length][second.length]);
 
 #### Task 3: Top K Frequent Elements
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in TypeScript to read an array and an integer K, then print the K most frequent values ordered by frequency descending and value ascending. |
-| A | Reference answer in TypeScript is shown below. |
+Q: Write code in TypeScript to read an array and an integer K, then print the K most frequent values ordered by frequency descending and value ascending.
+
+A: Reference answer in TypeScript
 
 ```typescript
 const fs = require('fs');
@@ -2864,10 +2782,9 @@ console.log(ordered.slice(0, k).map(item => item[0]).join(' '));
 
 #### Task 4: Course Schedule
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in TypeScript to read the number of courses and prerequisite pairs, then print true if all courses can be finished, otherwise print false. |
-| A | Reference answer in TypeScript is shown below. |
+Q: Write code in TypeScript to read the number of courses and prerequisite pairs, then print true if all courses can be finished, otherwise print false.
+
+A: Reference answer in TypeScript
 
 ```typescript
 const fs = require('fs');
@@ -2909,10 +2826,9 @@ console.log(visited === courseCount ? 'true' : 'false');
 
 #### Task 5: Dijkstra Shortest Path
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in TypeScript to read a weighted directed graph and print the shortest distance from source to target. Print -1 when the target is unreachable. |
-| A | Reference answer in TypeScript is shown below. |
+Q: Write code in TypeScript to read a weighted directed graph and print the shortest distance from source to target. Print -1 when the target is unreachable.
+
+A: Reference answer in TypeScript
 
 ```typescript
 const fs = require('fs');
@@ -2955,10 +2871,9 @@ console.log(distance[target] === Number.MAX_SAFE_INTEGER ? -1 : distance[target]
 
 #### Task 6: Sliding Window Maximum
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in TypeScript to read an array and a window size K, then print the maximum value in each sliding window. |
-| A | Reference answer in TypeScript is shown below. |
+Q: Write code in TypeScript to read an array and a window size K, then print the maximum value in each sliding window.
+
+A: Reference answer in TypeScript
 
 ```typescript
 const fs = require('fs');
@@ -2988,10 +2903,9 @@ console.log(answer.join(' '));
 
 #### Task 7: LRU Cache
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in TypeScript to simulate an LRU cache. Input starts with capacity and Q, followed by PUT key value or GET key commands. Print results for GET commands in order, using -1 for missing keys. |
-| A | Reference answer in TypeScript is shown below. |
+Q: Write code in TypeScript to simulate an LRU cache. Input starts with capacity and Q, followed by PUT key value or GET key commands. Print results for GET commands in order, using -1 for missing keys.
+
+A: Reference answer in TypeScript
 
 ```typescript
 const fs = require('fs');
@@ -3032,10 +2946,9 @@ console.log(outputs.join(' '));
 
 #### Task 8: Trie Prefix Search
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in TypeScript to build a trie from given words and print how many words match each query prefix. |
-| A | Reference answer in TypeScript is shown below. |
+Q: Write code in TypeScript to build a trie from given words and print how many words match each query prefix.
+
+A: Reference answer in TypeScript
 
 ```typescript
 const fs = require('fs');
@@ -3065,10 +2978,9 @@ console.log(answers.join(' '));
 
 #### Task 9: Word Ladder
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in TypeScript to read a begin word, an end word, and a dictionary, then print the shortest transformation length. Print 0 when no transformation exists. |
-| A | Reference answer in TypeScript is shown below. |
+Q: Write code in TypeScript to read a begin word, an end word, and a dictionary, then print the shortest transformation length. Print 0 when no transformation exists.
+
+A: Reference answer in TypeScript
 
 ```typescript
 const fs = require('fs');
@@ -3119,10 +3031,9 @@ console.log(0);
 
 #### Task 10: Kth Largest Element
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in TypeScript to read an array and an integer K, then print the Kth largest element. |
-| A | Reference answer in TypeScript is shown below. |
+Q: Write code in TypeScript to read an array and an integer K, then print the Kth largest element.
+
+A: Reference answer in TypeScript
 
 ```typescript
 const fs = require('fs');
@@ -3138,10 +3049,9 @@ console.log(values[k - 1]);
 
 #### Task 1: Merge Intervals
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Rust to read N intervals and print the merged non-overlapping intervals in the format "start end \| start end". |
-| A | Reference answer in Rust is shown below. |
+Q: Write code in Rust to read N intervals and print the merged non-overlapping intervals in the format "start end | start end".
+
+A: Reference answer in Rust
 
 ```rust
 use std::io::{self, Read};
@@ -3189,10 +3099,9 @@ fn main() {
 
 #### Task 2: Longest Common Subsequence
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Rust to read two strings and print the length of their longest common subsequence. |
-| A | Reference answer in Rust is shown below. |
+Q: Write code in Rust to read two strings and print the length of their longest common subsequence.
+
+A: Reference answer in Rust
 
 ```rust
 use std::io::{self, Read};
@@ -3225,10 +3134,9 @@ fn main() {
 
 #### Task 3: Top K Frequent Elements
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Rust to read an array and an integer K, then print the K most frequent values ordered by frequency descending and value ascending. |
-| A | Reference answer in Rust is shown below. |
+Q: Write code in Rust to read an array and an integer K, then print the K most frequent values ordered by frequency descending and value ascending.
+
+A: Reference answer in Rust
 
 ```rust
 use std::collections::HashMap;
@@ -3259,10 +3167,9 @@ fn main() {
 
 #### Task 4: Course Schedule
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Rust to read the number of courses and prerequisite pairs, then print true if all courses can be finished, otherwise print false. |
-| A | Reference answer in Rust is shown below. |
+Q: Write code in Rust to read the number of courses and prerequisite pairs, then print true if all courses can be finished, otherwise print false.
+
+A: Reference answer in Rust
 
 ```rust
 use std::collections::VecDeque;
@@ -3314,10 +3221,9 @@ fn main() {
 
 #### Task 5: Dijkstra Shortest Path
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Rust to read a weighted directed graph and print the shortest distance from source to target. Print -1 when the target is unreachable. |
-| A | Reference answer in Rust is shown below. |
+Q: Write code in Rust to read a weighted directed graph and print the shortest distance from source to target. Print -1 when the target is unreachable.
+
+A: Reference answer in Rust
 
 ```rust
 use std::cmp::Reverse;
@@ -3377,10 +3283,9 @@ fn main() {
 
 #### Task 6: Sliding Window Maximum
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Rust to read an array and a window size K, then print the maximum value in each sliding window. |
-| A | Reference answer in Rust is shown below. |
+Q: Write code in Rust to read an array and a window size K, then print the maximum value in each sliding window.
+
+A: Reference answer in Rust
 
 ```rust
 use std::collections::VecDeque;
@@ -3420,10 +3325,9 @@ fn main() {
 
 #### Task 7: LRU Cache
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Rust to simulate an LRU cache. Input starts with capacity and Q, followed by PUT key value or GET key commands. Print results for GET commands in order, using -1 for missing keys. |
-| A | Reference answer in Rust is shown below. |
+Q: Write code in Rust to simulate an LRU cache. Input starts with capacity and Q, followed by PUT key value or GET key commands. Print results for GET commands in order, using -1 for missing keys.
+
+A: Reference answer in Rust
 
 ```rust
 use std::collections::{HashMap, VecDeque};
@@ -3480,10 +3384,9 @@ fn main() {
 
 #### Task 8: Trie Prefix Search
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Rust to build a trie from given words and print how many words match each query prefix. |
-| A | Reference answer in Rust is shown below. |
+Q: Write code in Rust to build a trie from given words and print how many words match each query prefix.
+
+A: Reference answer in Rust
 
 ```rust
 use std::io::{self, Read};
@@ -3517,10 +3420,9 @@ fn main() {
 
 #### Task 9: Word Ladder
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Rust to read a begin word, an end word, and a dictionary, then print the shortest transformation length. Print 0 when no transformation exists. |
-| A | Reference answer in Rust is shown below. |
+Q: Write code in Rust to read a begin word, an end word, and a dictionary, then print the shortest transformation length. Print 0 when no transformation exists.
+
+A: Reference answer in Rust
 
 ```rust
 use std::collections::{HashSet, VecDeque};
@@ -3584,10 +3486,9 @@ fn main() {
 
 #### Task 10: Kth Largest Element
 
-| Row | Content |
-| --- | --- |
-| Q | Write code in Rust to read an array and an integer K, then print the Kth largest element. |
-| A | Reference answer in Rust is shown below. |
+Q: Write code in Rust to read an array and an integer K, then print the Kth largest element.
+
+A: Reference answer in Rust
 
 ```rust
 use std::io::{self, Read};
