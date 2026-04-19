@@ -5,6 +5,14 @@
   "outputDirectory": "dist",
   "rewrites": [
     {
+      "source": "/api/admin/approve-user/:id",
+      "destination": "/api/admin/approve-user?id=:id"
+    },
+    {
+      "source": "/api/admin/reject-user/:id",
+      "destination": "/api/admin/reject-user?id=:id"
+    },
+    {
       "source": "/((?!api(?:/|$)).*)",
       "destination": "/index.html"
     }
