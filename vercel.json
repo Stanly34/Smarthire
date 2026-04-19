@@ -5,12 +5,40 @@
   "outputDirectory": "dist",
   "rewrites": [
     {
-      "source": "/api/admin/approve-user/:id",
-      "destination": "/api/admin/approve-user?id=:id"
+      "source": "/api/admin/:path*",
+      "destination": "/api/admin?path=:path*"
     },
     {
-      "source": "/api/admin/reject-user/:id",
-      "destination": "/api/admin/reject-user?id=:id"
+      "source": "/api/applications/:path*",
+      "destination": "/api/applications?path=:path*"
+    },
+    {
+      "source": "/api/auth/:path*",
+      "destination": "/api/auth?path=:path*"
+    },
+    {
+      "source": "/api/chat/:path*",
+      "destination": "/api/chat?path=:path*"
+    },
+    {
+      "source": "/api/coding/:path*",
+      "destination": "/api/coding?path=:path*"
+    },
+    {
+      "source": "/api/companies/:path*",
+      "destination": "/api/companies?path=:path*"
+    },
+    {
+      "source": "/api/jobs/:path*",
+      "destination": "/api/jobs?path=:path*"
+    },
+    {
+      "source": "/api/skills/:path*",
+      "destination": "/api/skills?path=:path*"
+    },
+    {
+      "source": "/api/students/:path*",
+      "destination": "/api/students?path=:path*"
     },
     {
       "source": "/((?!api(?:/|$)).*)",
